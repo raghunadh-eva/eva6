@@ -4,9 +4,7 @@ I tried applying the concepts explained in the class. I have three blocks in my 
 
 Block3:
 
-Use transition layer to conver 7x7x32 into 7x7x20 (tried 7x7x10) with 1x1x20 convolution
 
-Use the gap layer to to convert into 1d and pass to Fully connected layer
 
 ​    self.conv3 = nn.Sequential(
 
@@ -18,8 +16,6 @@ Use the gap layer to to convert into 1d and pass to Fully connected layer
 
 ​    )
 
-​    \#7x7x10
-
 ​    self.fc = nn.Sequential(
 
 ​      nn.Linear(20, 10)
@@ -28,7 +24,11 @@ Use the gap layer to to convert into 1d and pass to Fully connected layer
 
 
 
-Re-written blocks:
+**<u>Re-written blocks:</u>**
+
+
+
+Block1: Use 16 channels instead of 32 and extract more features in block1 instead of single 32channel convolution
 
  self.conv1 = nn.Sequential(
 
@@ -62,7 +62,7 @@ Re-written blocks:
 
 ​    )
 
-​    
+​    BLOCK2: Extend the same logic and to block2 as well block3 as well
 
 ​    self.conv2 = nn.Sequential(
 
@@ -123,6 +123,10 @@ Re-written blocks:
 ​      nn.Linear(16, 10)
 
 ​    )
+
+Changes observed with and without dropout - 
+
+If I don't use dropout, the model learns fast  for the train data in the first 5 epochs and the the gap between the train accuracy and test accuracy keeps widening. With dropout, I have lower train accuracy vs test in the same first few epochs and as training accuracy improves over epochs test does converge and follow it and in the end resulting in similar accuracy
 
 Accuracy : Epoch19
 
