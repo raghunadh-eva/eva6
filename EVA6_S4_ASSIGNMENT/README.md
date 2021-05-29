@@ -16,4 +16,7 @@ EVA6_S4_ASSIGNMENT
 	- NN_BACKPROPAGATION_S4_XLS_SCREENSHOT.JPG --> Screenshot of the work done in XLS (same in README.md as well)
 	- Two_input_FCNN.JPG -> Image of the two input network
 
-   - PART2 --> To be filled
+   - PART2 --> 
+        -README.md has the explanation
+	-Colab notebook
+	
