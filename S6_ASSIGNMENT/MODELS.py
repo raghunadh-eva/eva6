@@ -8,7 +8,7 @@ from torchvision import datasets, transforms, utils
 # %matplotlib inline
 import matplotlib.pyplot as plt
 from torch.optim.lr_scheduler import StepLR
-!pip install torchsummary
+#!pip install torchsummary
 from torchsummary import summary
 import numpy as np
 
