@@ -4,7 +4,102 @@ Email: raghunadpuranam@gmail.com
 
 Group: NA
 
-Task1 : Take the best model from S5 and use Batch norm & L1 loss.
+**What is your code all about ?**
+
+1. Take my CODE from previous assignment - Was using BatchNorm, Dropout earlier 
+2. Split it into blocks
+   1. Basic Setup & Data Loading block
+   2. Extended to add L1 loss to the total loss.
+      1. Experimented with lambda values. Some details on how I arrived at the lambda at the bottom of this README
+   3. Definitions of three models using BatchNorm, LayerNorm, GroupNorm
+   4. Define train and test definitions
+   5. Final **MAIN** block which has two functions
+      1. MAIN(INPUT_MODEL_TYPE,EPOCHS) -> Specify the type of model to chose
+      2. run_train_test(model,epochs) -> Performs the training and validation & write outs
+         1. Model Summary
+         2. Test Loss/Accuracy Plots
+         3. Grid Image of 5x2 for misinterpreted images
+
+**How to perform 3 normalizations explained in the class**
+
+This question is slightly unclear to me , but I will try to answer theoretically and logistically
+
+Logistics - nn.GroupNorm to implement both layer normalization (with 1 group) and specify the number of groups for group normalization, with the requirement being the number of groups have to be divisible with number of channels
+
+Explanation:
+
+**Image Normalization** :  Technique to convert the range of input image to the entire spectrum
+
+If you have an image with values of 20 to 100 in the scale ( 0 to 255) , you basically modify it to gaussian distribution and have the values ranging from 0 to 255
+
+**Image Equalization:** Different from Image Normalization - this just ensures that there are equal number of pixels (histogram) at each pixel intensities of the input image
+
+**Batch Normalization:** Same as normalization , except that we do it over batch of images
+
+Let us say, I have batch of 128 images and all of them will be in memory at once on the GPU.
+
+Lets us say we are at layer in our network which has 3 output channels and say the size of our image is 2x2 (will implement for just two images)
+
+For batch norm - we take the mean of all the pixels in a channel for all images and also compute the variance
+$$
+X = MEAN / SQRT(VAR + E)
+$$
+
+$$
+Y = AX + B
+$$
+
+Where A , B  in the above equation are equivalent of Gamma & Beta (in regular convention) and are left to be figured by NN so that it can decide to discard or let the normalization take effect instead of us enforcing
+
+**Layer Normalization**
+
+Unfortunately not intuitive from the below image , but instead of doing it for all channels channel, we now do it from an image in the entire layer
+
+**Group Normalization:**
+
+This is kind of middle ground , where we group some channels within an image and apply the same instead of single one for whole layer.
+
+I didn't fill it for Group, since I have picked an odd channels and grouping in pytorch context can't be done for such configuration.
+
+But in-theory create 3 groups and normalize them independently instead of single for the entire layer
+
+![NORMALIZATION](NORMALIZATION.JPG)
+
+
+
+**Observations / Findings on implementing 3 methods**
+
+1. Batch Normalization:
+   1. Best Train Accuracy: 99.03 (20th epoch)
+   2. Best Test Accuracy: 99.22 (consistent in the last 4 epochs)
+2. Layer Normalization:
+   1. Best Train Accuracy: 98.94 (20th epoch)
+   2. Best Test Accuracy: 99.28 (20th , 2nd best - 99.24 12th epoch)
+   3. Least train accuracy. Does lesser parameters of Y,Beta explain this ?
+3. Group Normalization:
+   1. Best Train Accuracy: 99.02 (20th epoch)
+   2. Best Test Accuracy: 99.34 (20th epoch) , 2nd best - 99.3 (7th & 14th epoch)
+   3. The fluctuation in model performance was higher than other two between successive epochs
+4. Among 3 , batch norm had consistent reduction of loss as it progressed
+5. I would take the model with BatchNorm on this data for its consistency
+
+**PLOTS & MIS-QUALIFIED IMAGES**
+
+<img src="BN_PLOTS.JPG" alt="BN_PLOTS" style="zoom:15" />
+
+
+
+<img src="LN_PLOTS.JPG" alt="LN_PLOTS" style="zoom:150%;" />
+
+
+
+<img src="GN_PLOTS.JPG" alt="GN_PLOTS" style="zoom:150%;" />
+
+
+
+**APPLY L1 LOSS:**
+
+Take the best model from S5 and use Batch norm & L1 loss.
 
 Before L1 LOSS:
 
