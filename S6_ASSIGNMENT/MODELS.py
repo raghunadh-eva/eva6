@@ -156,22 +156,22 @@ class BatchNormNet(nn.Module):
         self.convblock6 = nn.Sequential(
             nn.Conv2d(in_channels=16, out_channels=20, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
-            nn.BatchNorm2d(20),            
+            nn.BatchNorm2d(20),
             nn.Dropout(dropout_perc)
         ) # output_size = 8 ; #Receptive field = 14x14
 
         self.convblock7 = nn.Sequential(
             nn.Conv2d(in_channels=20, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
         ) # output_size = 8 ; #Receptive field = 14x14
-     
+
         #CT3
         self.convblock8 = nn.Sequential(
-            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False), 
+            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
             nn.BatchNorm2d(32),
-            nn.Dropout(dropout_perc)          
+            nn.Dropout(dropout_perc)
         ) # output_size = 6 ; #Receptive field = 18x18
-                 
+
         # OUTPUT BLOCK
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size=6)
@@ -190,7 +190,7 @@ class BatchNormNet(nn.Module):
         x = self.convblock6(x)
         x = self.convblock7(x)
         x = self.convblock8(x)
-        x = self.gap(x)        
+        x = self.gap(x)
         x = self.convblock9(x)
 
         x = x.view(-1, 10)
@@ -235,22 +235,22 @@ class LayerNormNet(nn.Module):
         self.convblock6 = nn.Sequential(
             nn.Conv2d(in_channels=16, out_channels=20, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
-            nn.GroupNorm(1,20),            
+            nn.GroupNorm(1,20),
             nn.Dropout(dropout_perc)
         ) # output_size = 8 ; #Receptive field = 14x14
 
         self.convblock7 = nn.Sequential(
             nn.Conv2d(in_channels=20, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
         ) # output_size = 8 ; #Receptive field = 14x14
-     
+
         #CT3
         self.convblock8 = nn.Sequential(
-            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False), 
+            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
             nn.GroupNorm(1,32),
-            nn.Dropout(dropout_perc)          
+            nn.Dropout(dropout_perc)
         ) # output_size = 6 ; #Receptive field = 18x18
-                 
+
         # OUTPUT BLOCK
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size=6)
@@ -269,7 +269,7 @@ class LayerNormNet(nn.Module):
         x = self.convblock6(x)
         x = self.convblock7(x)
         x = self.convblock8(x)
-        x = self.gap(x)        
+        x = self.gap(x)
         x = self.convblock9(x)
 
         x = x.view(-1, 10)
@@ -314,22 +314,22 @@ class GroupNormNet(nn.Module):
         self.convblock6 = nn.Sequential(
             nn.Conv2d(in_channels=16, out_channels=20, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
-            nn.GroupNorm(2,20),            
+            nn.GroupNorm(2,20),
             nn.Dropout(dropout_perc)
         ) # output_size = 8 ; #Receptive field = 14x14
 
         self.convblock7 = nn.Sequential(
             nn.Conv2d(in_channels=20, out_channels=10, kernel_size=(1, 1), padding=0, bias=False),
         ) # output_size = 8 ; #Receptive field = 14x14
-     
+
         #CT3
         self.convblock8 = nn.Sequential(
-            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False), 
+            nn.Conv2d(in_channels=10, out_channels=32, kernel_size=(3, 3), padding=0, bias=False),
             nn.ReLU(),
             nn.GroupNorm(2,32),
-            nn.Dropout(dropout_perc)          
+            nn.Dropout(dropout_perc)
         ) # output_size = 6 ; #Receptive field = 18x18
-                 
+
         # OUTPUT BLOCK
         self.gap = nn.Sequential(
             nn.AvgPool2d(kernel_size=6)
@@ -348,7 +348,7 @@ class GroupNormNet(nn.Module):
         x = self.convblock6(x)
         x = self.convblock7(x)
         x = self.convblock8(x)
-        x = self.gap(x)        
+        x = self.gap(x)
         x = self.convblock9(x)
 
         x = x.view(-1, 10)
@@ -366,9 +366,9 @@ train_losses = []
 def train(model, device, train_loader, optimizer, epoch):
   model.train()
   pbar = tqdm(train_loader)
-  
+
   l1_lamda = 0.0001
-  
+
   correct = 0
   processed = 0
   for batch_idx, (data, target) in enumerate(pbar):
@@ -377,7 +377,7 @@ def train(model, device, train_loader, optimizer, epoch):
 
     # Init
     optimizer.zero_grad()
-    # In PyTorch, we need to set the gradients to zero before starting to do backpropragation because PyTorch accumulates the gradients on subsequent backward passes. 
+    # In PyTorch, we need to set the gradients to zero before starting to do backpropragation because PyTorch accumulates the gradients on subsequent backward passes.
     # Because of this, when you start your training loop, ideally you should zero out the gradients so that you do the parameter update correctly.
 
     # Predict
@@ -393,7 +393,7 @@ def train(model, device, train_loader, optimizer, epoch):
       l1 += p_tensor
 
     loss = loss + l1_lamda * l1
-    
+
     train_losses.append(loss)
 
     # Backpropagation
@@ -401,7 +401,7 @@ def train(model, device, train_loader, optimizer, epoch):
     optimizer.step()
 
     # Update pbar-tqdm
-    
+
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
     correct += pred.eq(target.view_as(pred)).sum().item()
     processed += len(data)
@@ -429,11 +429,11 @@ def test(model, device, test_loader):
                 test_fail_target.append(target[i])
 
     test_losses.append(test_loss)
-    
+
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
-    
+
     test_acc.append(100. * correct / len(test_loader.dataset))
 
     return test_losses, test_acc, test_fail_data, test_fail_target;
@@ -467,11 +467,11 @@ def run_train_test(model,EPOCHS,input_model_type):
 
   for epoch in range(EPOCHS):
     print("EPOCH:", epoch)
-    
+
     train(model, device, train_loader, optimizer, epoch)
-    
+
     test_losses, test_acc, test_fail_data, test_fail_target = test(model, device, test_loader)
-  
+
   #print(test_fail_data)
   fig, axs = plt.subplots(1, 2)
   if input_model_type == 0:
@@ -480,7 +480,7 @@ def run_train_test(model,EPOCHS,input_model_type):
     fig.suptitle('Model Type: Layer normalization')
   if input_model_type == 2:
     fig.suptitle('Model Type: Group normalization')
-  
+
   axs[0].set_title('Test/Validation Loss Graph')
   axs[0].set_xticks(np.arange(1,EPOCHS+1))
   #axs[0].xlabel('Test/Validation Loss Graph')
@@ -489,14 +489,14 @@ def run_train_test(model,EPOCHS,input_model_type):
   axs[1].set_xticks(np.arange(1,EPOCHS+1))
   #axs[1].xlabel('Test/Validation Accuracy Graph')
   #axs[1].ylabel('Accuracy')
-  
+
   axs[0].plot(test_losses)
   axs[1].plot(test_acc)
 
   test_10_images = []
   for i in range(0,10):
     test_10_images.append(test_fail_data[i])
-  
+
   grid = torchvision.utils.make_grid(torch.stack(test_10_images).cpu(), nrow=5)
   plt.figure(figsize=(15,15))
   plt.imshow(np.transpose(grid, (1,2,0)))
@@ -519,7 +519,7 @@ EPOCHS: num_epochs
 
 """
 
-main(2,20)
+#main(2,20)
 
 #
 
