@@ -29,6 +29,14 @@ test_nonorm_transforms  = transforms.Compose([
                                        transforms.ToTensor()
                                       ])
 
+cuda = torch.cuda.is_available()
+#what happens when SEED = 2 ?
+torch.manual_seed(SEED)
+
+#set the seed for GPU device as well
+if cuda:
+  torch.cuda.manual_seed(SEED)
+
 dataloader_args = dict(shuffle=True, batch_size=128, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
 
 train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
