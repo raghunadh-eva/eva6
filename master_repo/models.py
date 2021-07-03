@@ -18,10 +18,10 @@ import cv2
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
-import albumentations.pytorch.ToTensorV2 as ToTensorV2
-import tqdm.tqdm as tqdm
-import torch.optim.lr_scheduler.StepLR as StepLR
-import __future__.print_function as print_function
+import albumentations.pytorch as ToTensorV2
+import tqdm as tqdm
+import torch.optim.lr_scheduler as StepLR
+
 
 
 dropout_perc = 0.05
