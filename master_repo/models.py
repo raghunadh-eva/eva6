@@ -7,6 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1_il1jNVHb-cFLc5kqOmVPIByiQ4Jz4OZ
 """
 
+dropout_perc = 0.05
 class BasicBlock(nn.Module):
     expansion = 1
 
