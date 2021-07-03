@@ -15,6 +15,8 @@ import torchvision
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import albumentations as A
+import torchvision.transforms as transforms
 
 dropout_perc = 0.05
 class BasicBlock(nn.Module):

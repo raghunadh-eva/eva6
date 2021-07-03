@@ -7,6 +7,7 @@ import torchvision
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
+import albumentations as A
 
 test_transforms  = transforms.Compose([
                                        transforms.ToTensor(),

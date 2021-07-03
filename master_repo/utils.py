@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import albumentations as A
 import cv2
+import torchvision.transforms as transforms
 
 train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
 test_nonorm =  datasets.CIFAR10('./data_nonorm', train=False, download=True, transform=test_nonorm_transforms)
