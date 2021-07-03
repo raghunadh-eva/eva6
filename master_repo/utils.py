@@ -31,6 +31,7 @@ test_nonorm_transforms  = transforms.Compose([
 
 cuda = torch.cuda.is_available()
 #what happens when SEED = 2 ?
+SEED = 1
 torch.manual_seed(SEED)
 
 #set the seed for GPU device as well
@@ -85,19 +86,6 @@ def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_n
 ##copied from albumentations.io
 cv2.setNumThreads(0)
 cv2.ocl.setUseOpenCL(False)
-
-class data_albumentations(datasets.CIFAR10):
-    def __init__(self, root="~/data/cifar10", train=True, download=True, transform=None):
-        super().__init__(root=root, train=train, download=download, transform=transform)
-
-    def __getitem__(self, index):
-        image, label = self.data[index], self.targets[index]
-
-        if self.transform is not None:
-            transformed = self.transform(image=image)
-            image = transformed["image"]
-
-        return image, label
 
 def show_test_validation_plots(test_losses,test_acc,EPOCHS):
 
