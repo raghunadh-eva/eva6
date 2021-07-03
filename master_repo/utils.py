@@ -29,6 +29,8 @@ test_nonorm_transforms  = transforms.Compose([
                                        transforms.ToTensor()
                                       ])
 
+dataloader_args = dict(shuffle=True, batch_size=128, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
+
 train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
 test_nonorm =  datasets.CIFAR10('./data_nonorm', train=False, download=True, transform=test_nonorm_transforms)
 train_loader_nonorm = torch.utils.data.DataLoader(train_nonorm, **dataloader_args)
