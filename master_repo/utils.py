@@ -22,6 +22,12 @@ import albumentations.pytorch as ToTensorV2
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
+train_nonorm_transforms = transforms.Compose([
+                                       transforms.ToTensor()
+                                      ])
+test_nonorm_transforms  = transforms.Compose([
+                                       transforms.ToTensor()
+                                      ])
 
 train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
 test_nonorm =  datasets.CIFAR10('./data_nonorm', train=False, download=True, transform=test_nonorm_transforms)
