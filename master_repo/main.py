@@ -10,7 +10,7 @@ import cv2
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
-import albumentations.pytorch as ToTensorV2
+import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
@@ -36,7 +36,7 @@ train_transforms_a = A.Compose([
                                        ], p = 0.5),
                                        #A.Cutout(num_holes=1,max_h_size=16,max_w_size=16,fill_value=(0.4914,0.4822,0.4465))
                                        A.CoarseDropout(max_holes=1,max_height=16,max_width=16,min_holes=1,min_height=16,min_width=16,fill_value=(0.4914, 0.4822, 0.4465),mask_fill_value=None),
-                                       ToTensorV2()
+                                       Apy.ToTensorV2()
                                        ])
 
 train = data_albumentations(train=True,  download=True, transform=train_transforms_a)
