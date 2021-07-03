@@ -99,14 +99,16 @@ class BatchNormNet(nn.Module):
             nn.Conv2d(in_channels=3, out_channels=32, kernel_size=(3, 3), padding=1, dilation = 1,bias=False),
             nn.BatchNorm2d(32),
             nn.ReLU(),
-            nn.Dropout(dropout_perc); #output size = 32 ; receptive field = 3x3
+            nn.Dropout(dropout_perc)
+            #output size = 32 ; receptive field = 3x3
         ) 
 
         self.convblock2 = nn.Sequential(
             nn.Conv2d(in_channels=32, out_channels=64, kernel_size=(3, 3), padding=1, dilation = 1,bias=False),
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.Dropout(dropout_perc); #output size = 32 ; receptive field = 5x5
+            nn.Dropout(dropout_perc)
+            #output size = 32 ; receptive field = 5x5
         ) 
         
        #BLOCK C1 TRANSITION
