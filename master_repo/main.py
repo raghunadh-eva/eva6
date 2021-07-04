@@ -14,6 +14,8 @@ import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
+from models import *
+from utils import *
 
 test_transforms  = transforms.Compose([
                                        transforms.ToTensor(),
@@ -83,6 +85,13 @@ classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 loss_function = nn.CrossEntropyLoss()
+
+optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
+
+scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
+
+model = ResNet18().to(device)
+summary(model, input_size=(3, h, w))
 
 def train(model, device, train_loader, optimizer):
   model.train()
