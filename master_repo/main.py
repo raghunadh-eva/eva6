@@ -14,8 +14,8 @@ import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
-import models
-import utils
+from content.eva6.master_repo import models
+from content.eva6.master_repo import utils
 
 test_transforms  = transforms.Compose([
                                        transforms.ToTensor(),
