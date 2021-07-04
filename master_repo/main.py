@@ -84,7 +84,7 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = ResNet18()
+model = models.ResNet18()
 model = model.to(device)
 
 loss_function = nn.CrossEntropyLoss()
