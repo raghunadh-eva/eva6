@@ -52,7 +52,7 @@ def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_n
     chsum += data.sum(dim=(0,2,3),keepdim=True)
 
   mean = chsum / (len(train_nonorm) * h * w)
-
+  train_mean = mean
   chsum = None
   for index, (data,target) in enumerate(train_loader_nonorm):
     if index == 0:
@@ -61,7 +61,7 @@ def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_n
     else:
       chsum += (data - mean).pow(2).sum(dim=(0,2,3),keepdim=True)
 
-  std = torch.sqrt(chsum/(len(train_nonorm) * h * w))
+  train_std = torch.sqrt(chsum/(len(train_nonorm) * h * w))
   #print("Traindata Mean",mean)
   #print("Traindata std dev",std)
 
@@ -71,6 +71,7 @@ def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_n
     chsum += data.sum(dim=(0,2,3),keepdim=True)
 
   mean = chsum / (len(test_nonorm) * h * w)
+  test_mean = mean
 
   chsum = None
   for index, (data,target) in enumerate(test_loader_nonorm):
@@ -79,9 +80,9 @@ def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_n
     else:
       chsum += (data - mean).pow(2).sum(dim=(0,2,3),keepdim=True)
 
-  std = torch.sqrt(chsum/(len(test_nonorm) * h * w))
+  test_std = torch.sqrt(chsum/(len(test_nonorm) * h * w))
 
-  return train_mean,train_std_dev,test_mean,test_std_dev;
+  return train_mean,train_std,test_mean,test_std;
 
 ##copied from albumentations.io
 cv2.setNumThreads(0)
