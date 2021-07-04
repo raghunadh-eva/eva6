@@ -84,9 +84,6 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = ResNet18()
-model = model.to(device)
-
 loss_function = nn.CrossEntropyLoss()
 
 optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
@@ -176,4 +173,12 @@ def test(model, device, test_loader):
 
     return test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target;
 def model_summary():
+    cuda = torch.cuda.is_available()
+
+    if cuda:
+      torch.cuda.manual_seed(1)
+
+    device = torch.device("cuda" if cuda else "cpu")
+    model = models.ResNet18()
+    model = model.to(device)
     summary(model, input_size=(3, 32, 32))
