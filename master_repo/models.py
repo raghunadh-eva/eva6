@@ -20,7 +20,6 @@ import torchvision.datasets as datasets
 import torchvision.utils as utils
 import albumentations.pytorch as ToTensorV2
 import tqdm as tqdm
-import torch.optim.lr_scheduler as StepLR
 
 
 

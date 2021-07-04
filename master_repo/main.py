@@ -14,8 +14,8 @@ import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
-from eva6.master_repo.models import *
-from eva6.master_repo.utils import *
+from eva6.master_repo import *
+from eva6.master_repo import *
 
 test_transforms  = transforms.Compose([
                                        transforms.ToTensor(),
@@ -84,7 +84,7 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = ResNet18()
+model = ResNet(BasicBlock, [2, 2, 2, 2])
 model = model.to(device)
 
 summary(model, input_size=(3, 32, 32))
