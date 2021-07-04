@@ -175,5 +175,5 @@ def test(model, device, test_loader):
     test_acc.append(100. * correct / len(test_loader.dataset))
 
     return test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target;
-def model_summary:
+def model_summary():
     summary(model, input_size=(3, 32, 32))
