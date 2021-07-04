@@ -293,3 +293,11 @@ class BatchNormNet(nn.Module):
         x = self.convblock13(x)
 
         return F.log_softmax(x, dim=-1)
+
+def test():
+    net = ResNet18()
+    y = net(torch.randn(1, 3, 32, 32))
+    print(y.size())
+
+if __name == __main__:
+    net = ResNet18()
