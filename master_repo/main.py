@@ -86,16 +86,16 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-#model = ResNet18()
-#model = model.to(device)
+model = ResNet18()
+model = model.to(device)
 
-#summary(model, input_size=(3, 32, 32))
+summary(model, input_size=(3, 32, 32))
 
 loss_function = nn.CrossEntropyLoss()
 
-#optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
+optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
 
-#scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
+scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
 
 
 def train(model, device, train_loader, optimizer):
