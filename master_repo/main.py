@@ -84,7 +84,7 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = models.ResNet18()
+model = ResNet18()
 model = model.to(device)
 
 summary(model, input_size=(3, 32, 32))
