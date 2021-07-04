@@ -14,7 +14,7 @@ import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
-from eva6.master_repo.models import *
+from eva6.master_repo.models import as m
 from eva6.master_repo.utils import *
 
 test_transforms  = transforms.Compose([
@@ -84,7 +84,7 @@ test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-model = ResNet18().to(device)
+model = m.ResNet18().to(device)
 summary(model, input_size=(3, 32, 32))
 
 loss_function = nn.CrossEntropyLoss()
