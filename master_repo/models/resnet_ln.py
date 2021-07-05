@@ -72,9 +72,7 @@ class ResNet_ln(nn.Module):
         return self.gradient
 
     def get_activations(self, x):
-        print('a1')
         out = self.features(x)
-        print('a6')
         return out
 
     def forward(self, x):

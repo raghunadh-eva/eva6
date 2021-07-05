@@ -22,6 +22,8 @@ import albumentations.pytorch as ToTensorV2
 import torch.optim.lr_scheduler as StepLR
 from tqdm import tqdm
 
+import torchvision.utils.save_image as save_image
+
 def get_data_mean_std():
 
   if args.dataset is "CIFAR10":

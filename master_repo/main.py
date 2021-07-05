@@ -14,6 +14,7 @@ import torchvision.datasets as datasets
 import torchvision.utils as utils
 import albumentations.pytorch as Apy
 import torch.optim.lr_scheduler as StepLR
+import torchvision.utils.save_image as save_image
 
 from torchsummary import summary
 from tqdm import tqdm
@@ -121,7 +122,7 @@ else:
 if args.scheduler == 'StepLR':
     scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
 elif args.scheduler == 'ROP':
-    scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, verbose=True)
 else :
     raise Exception("The specified scheduler doesnt exist")
 
