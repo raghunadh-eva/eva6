@@ -185,7 +185,7 @@ def gradCAM(model,device,test_loader,num_images):
           num_images = num_images - 1;
       break
 
-class data_albumentations(datasets):
+class data_albumentations():
     def __init__(self, root="~/data/", train=True, download=True, transform=None):
         super().__init__(root=root, train=train, download=download, transform=transform)
     def __getitem__(self, index):
