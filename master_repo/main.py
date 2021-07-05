@@ -101,9 +101,17 @@ print(device)
 
 if args.model == "resnet18":
     model = ResNet18().to(device)
+elif args.model == "resnet18_ln":
+    model = ResNet18_ln().to(device)
+else:
+    raise Exception("The input model type is not supported")
 
 if args.dataset == "CIFAR10":
     summary(model, input_size=(3, 32, 32))
+elif args.dataset == "MNIST":
+    print('MNIST DATA')
+else:
+    raise Exception("The input dataset is not supported")
 
 if args.optimizer == 'SGD':
     optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)

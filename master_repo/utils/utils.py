@@ -94,7 +94,8 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
 
   test_10_images = []
   for i in range(0,n):
-    test_10_images.append(test_fail_data[i])
+    img_un = unnorm_img(test_fail_data[i])
+    test_10_images.append(img_un)
 
   test_10_images_target = []
   for i in range(0,n):
@@ -110,13 +111,7 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
   print('Predicted Labels')
   print(' '.join('%5s' % classes[test_10_pred_target[j]] for j in range(0,n)))
 
-  test_10_images_unnorm = []
-
-  img_un = unnorm_img(img)
-
-  test_10_images_unnorm.append(img_un)
-
-  grid = torchvision.utils.make_grid(torch.stack(test_10_images_unnorm).cpu(), nrow=5)
+  grid = torchvision.utils.make_grid(torch.stack(test_10_images).cpu(), nrow=5)
   plt.figure(figsize=(5,5))
   plt.imshow(np.transpose(grid, (1,2,0)))
 
