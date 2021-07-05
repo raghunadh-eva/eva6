@@ -139,12 +139,17 @@ print("No of EPOCHS:",args.epochs)
 
 test_losses = []
 test_acc = []
+total_train_loss = 0
 
 for epoch in range(args.epochs):
     print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
-    train(model, device, train_loader, optimizer,loss_function)
-    scheduler.step()
+    loss = train(model, device, train_loader, optimizer,loss_function)
+    if args.scheduler == 'ROP':
+        total_train_loss += loss
+        scheduler.step(total_train_loss)
+    else:
+        scheduler.step()
     test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
 
 show_test_validation_plots(test_losses,test_acc,args.epochs)
