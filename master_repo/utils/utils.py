@@ -179,15 +179,19 @@ def gradCAM(model,device,test_loader,num_images):
           img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
           #tran = transforms.ToTensor()
           plt.subplot(4, n*2/4, counter)
+          plt.figure(figsize=(5,5))
           plt.imshow(img)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           counter = counter + 1
           plt.subplot(4, n*2/4, counter)
+          plt.figure(figsize=(5,5))
           plt.imshow(gradcam)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           plt.subplots_adjust(top=6, bottom=4, left=3, right=5)
+            plt.figure(figsize=(5,5))
+
           num_images = num_images - 1;
       break
 
