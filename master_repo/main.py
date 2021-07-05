@@ -19,8 +19,8 @@ import torch.optim.lr_scheduler as StepLR
 
 import argparse
 
-#def main(argv=None)
-print('reach')
+def main():
+    print('reach')
 #parser = argparse.ArgumentParser(description='Call the main the function with arguments to perform tranining/validation')
 #parser.add_argument("-d", "--dataset", help='specify the dataset to be used, MNIST,CIFAR10')
 #parser.add_argument("-b", "--batch_size", type=int, help="specify the batch_size to be used. default: 64",default=64)
