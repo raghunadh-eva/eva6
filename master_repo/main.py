@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import cv2
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -8,8 +9,6 @@ import torchvision
 import matplotlib.pyplot as plt
 import numpy as np
 import albumentations as A
-import cv2
-from torchsummary import summary
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
@@ -17,6 +16,7 @@ import albumentations.pytorch as Apy
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
+from torchsummary import summary
 from models import *
 from utils import *
 
@@ -77,8 +77,8 @@ train_transforms_a = A.Compose([
                      ])
 
 if args.dataset == 'CIFAR10':
-    train = data_albumentations_cifar10(root='./data',train=True,download=True, transform=train_transforms_a)
-    test =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
+    train_data = data_albumentations_cifar10(root='./data',train=True,download=True, transform=train_transforms_a)
+    test_data =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
 
 elif args.dataset == 'MNIST':
     print("place holder for mnist data")
@@ -120,9 +120,9 @@ else :
 dataloader_args = dict(shuffle=True, batch_size=args.batch_size, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
 #Why change batch_size for CPU - since it should not matter
 
-train_loader = torch.utils.data.DataLoader(train, **dataloader_args)
+train_loader = torch.utils.data.DataLoader(train_data, **dataloader_args)
 
-test_loader  = torch.utils.data.DataLoader(test, **dataloader_args)
+test_loader  = torch.utils.data.DataLoader(test_data, **dataloader_args)
 
 loss_function = nn.CrossEntropyLoss()
 
