@@ -1,2 +1,2 @@
-from models import .resnet
-from models import .batchnormnet
+from .resnet import *
+from .batchnormnet import *
