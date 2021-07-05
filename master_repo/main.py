@@ -41,6 +41,20 @@ train_transforms_a = A.Compose([
                                        Apy.ToTensorV2()
                                        ])
 
+def model_summary():
+    cuda = torch.cuda.is_available()
+
+    if cuda:
+      torch.cuda.manual_seed(1)
+
+    device = torch.device("cuda" if cuda else "cpu")
+    model = models.ResNet18()
+    model = model.to(device)
+    summary(model, input_size=(3, 32, 32))
+    optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
+
+    scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
+
 class data_albumentations(datasets.CIFAR10):
     def __init__(self, root="~/data/cifar10", train=True, download=True, transform=None):
         super().__init__(root=root, train=train, download=download, transform=transform)
@@ -167,16 +181,3 @@ def test(model, device, test_loader):
     test_acc.append(100. * correct / len(test_loader.dataset))
 
     return test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target;
-def model_summary():
-    cuda = torch.cuda.is_available()
-
-    if cuda:
-      torch.cuda.manual_seed(1)
-
-    device = torch.device("cuda" if cuda else "cpu")
-    model = models.ResNet18()
-    model = model.to(device)
-    summary(model, input_size=(3, 32, 32))
-    optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
-
-    scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
