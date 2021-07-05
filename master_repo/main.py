@@ -13,10 +13,10 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
 import albumentations.pytorch as Apy
-import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
 from torchsummary import summary
+from tqdm import tqdm
 from models import *
 from utils import *
 
