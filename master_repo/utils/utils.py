@@ -112,9 +112,9 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
 
   test_10_images_unnorm = []
 
-  img = unnorm_img(img)
+  img_un = unnorm_img(img)
 
-  test_10_images_unnorm.append(img)
+  test_10_images_unnorm.append(img_un)
 
   grid = torchvision.utils.make_grid(torch.stack(test_10_images_unnorm).cpu(), nrow=5)
   plt.figure(figsize=(5,5))
