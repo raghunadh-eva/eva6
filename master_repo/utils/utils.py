@@ -195,7 +195,7 @@ class data_albumentations_cifar10(datasets.CIFAR10):
             return image, label
 
 
-def train(model, device, train_loader, optimizer):
+def train(model, device, train_loader, optimizer,loss_function):
   model.train()
   pbar = tqdm(train_loader)
 
