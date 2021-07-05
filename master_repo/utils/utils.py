@@ -90,8 +90,6 @@ def show_test_validation_plots(test_losses,test_acc,EPOCHS):
   axs[0].plot(test_losses)
   axs[1].plot(test_acc)
 
-  plt.imshow()
-
 def show_images(test_fail_data,test_fail_target,test_pred_target,n):
 
   test_10_images = []
