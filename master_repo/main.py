@@ -76,7 +76,7 @@ train_transforms_a = A.Compose([
                      ])
 
 if args.dataset == 'CIFAR10':
-    train = data_albumentations(dataset=datasets.CIFAR10,root='./data',train=True,download=True, transform=train_transforms_a)
+    train = data_albumentations(datasets.CIFAR10,root='./data',train=True,download=True, transform=train_transforms_a)
     test =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
 
 elif args.dataset == 'MNIST':
