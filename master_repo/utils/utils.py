@@ -245,6 +245,9 @@ def train(model, device, train_loader, optimizer,loss_function):
     #train_acc.append(100*correct/processed)
 
 def test(model, device, test_loader):
+    global test_losses
+    global test_acc
+    
     test_fail_data = []
     test_fail_target = []
     test_pred_target = []

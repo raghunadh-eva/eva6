@@ -128,6 +128,9 @@ loss_function = nn.CrossEntropyLoss()
 
 print("No of EPOCHS:",args.epochs)
 
+test_losses = []
+test_acc = []
+
 for epoch in range(args.epochs):
     print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
