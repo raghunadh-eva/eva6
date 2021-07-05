@@ -19,5 +19,5 @@ import torch.optim.lr_scheduler as StepLR
 
 #import argparse
 
-def main():
+def main:
     print('reach')
