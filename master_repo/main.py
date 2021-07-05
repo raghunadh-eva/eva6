@@ -134,7 +134,7 @@ test_acc = []
 for epoch in range(args.epochs):
     print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
-    train(model, device, train_loader, optimizer)
+    train(model, device, train_loader, optimizer,loss_function)
     scheduler.step()
     test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
 
