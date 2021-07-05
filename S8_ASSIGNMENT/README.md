@@ -148,6 +148,7 @@ Test set: Average loss: -47542.9319, Accuracy: 6906/10000 (69.06%)
 
 **MAIN.PY**
 
+```python
 #!/usr/bin/env python3
 
 import cv2
@@ -189,7 +190,7 @@ if args.dataset == "CIFAR10":
     std = [0.247 , 0.2435 , 0.2616]
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
-    
+
     h = 32
     w = 32
 
@@ -272,7 +273,7 @@ else:
 if args.scheduler == 'StepLR':
     scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
 elif args.scheduler == 'ROP':
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, verbose=True)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
 else :
     raise Exception("The specified scheduler doesnt exist")
 
@@ -307,15 +308,15 @@ show_test_validation_plots(test_losses,test_acc,args.epochs)
 show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images_gradcam)
 
 gradCAM(model,device,test_loader,args.num_images_gradcam)
+```
 
 
 
-**MODELS.py**
+**MODELS - RESNET18_LN**
 
-1. I have used the structure from the reference , since I thought I could use the same and add weekly changes as .py files
+Used the directory structure from the reference - since I thought could add models from each weeks work and other code would be same
 
-Model used for this assignment
-
+```python
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -342,7 +343,7 @@ class BasicBlock_ln(nn.Module):
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3,
                                stride=1, padding=1, bias=False)
         self.bn2 = nn.GroupNorm(1,planes)
-    
+
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
@@ -350,7 +351,7 @@ class BasicBlock_ln(nn.Module):
                           kernel_size=1, stride=stride, bias=False),
                 nn.GroupNorm(1,self.expansion*planes)
             )
-    
+
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
@@ -373,7 +374,7 @@ class ResNet_ln(nn.Module):
             self._make_layer(block, 512, num_blocks[3], stride=1)
         )
         self.linear = nn.Linear(512*block.expansion, num_classes)
-    
+
         self.gradient = None
     def _make_layer(self, block, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
@@ -382,24 +383,24 @@ class ResNet_ln(nn.Module):
             layers.append(block(self.in_planes, planes, stride))
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
-    
+
     def activations_hook(self, grad):
         self.gradient = grad
-    
+
     def get_gradient(self):
         return self.gradient
-    
+
     def get_activations(self, x):
         out = self.features(x)
         return out
-    
+
     def forward(self, x):
-    
+
         out = self.features(x)
-    
+
         if out.requires_grad:
           out.register_hook(self.activations_hook)
-    
+
         out = F.avg_pool2d(out, 8)
         out = out.view(out.size(0), -1)
         out = self.linear(out)
@@ -410,11 +411,13 @@ def ResNet18_ln():
 
 def ResNet34_ln():
     return ResNet_ln(BasicBlock_ln, [3, 4, 6, 3])
+```
 
 
 
 **UTILS.py**
 
+```python
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -526,7 +529,6 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
   print(' '.join('%5s' % classes[test_10_pred_target[j]] for j in range(0,n)))
 
   grid = torchvision.utils.make_grid(torch.stack(test_10_images).cpu(), nrow=5)
-  plt.figure(figsize=(5,5))
   plt.imshow(np.transpose(grid, (1,2,0)))
   plt.show()
 
@@ -545,12 +547,12 @@ classes = ('plane', 'car', 'bird', 'cat','deer', 'dog', 'frog', 'horse', 'ship',
 def gradCAM(model,device,test_loader,num_images):
 
     model.eval()
-    
+
     test_failed_data = []
-    
+
     counter = 0
     n = num_images
-    
+
     for data, target in test_loader:
       data, target = data.to(device), target.to(device)
       output = model(data)
@@ -558,7 +560,7 @@ def gradCAM(model,device,test_loader,num_images):
 
 
       for k,x in enumerate(pred.eq(target.view_as(pred))):
-    
+
         if not x:
           if num_images <= 0:
             plt.show()
@@ -575,9 +577,9 @@ def gradCAM(model,device,test_loader,num_images):
           heatmap = np.maximum(heatmap, 0)
           heatmap /= torch.max(heatmap)
           heatmap = heatmap.numpy()
-    
+
           img = unnorm_img(data[k])
-    
+
           save_image(img,'img.jpg')
           img = cv2.imread('./img.jpg')
           heatmap = cv2.resize(heatmap,(img.shape[1],img.shape[0]))
@@ -628,36 +630,36 @@ def train(model, device, train_loader, optimizer,loss_function):
     optimizer.zero_grad()
     # In PyTorch, we need to set the gradients to zero before starting to do backpropragation because PyTorch accumulates the gradients on subsequent backward passes.
     # Because of this, when you start your training loop, ideally you should zero out the gradients so that you do the parameter update correctly.
-    
+
     # Predict
     y_pred = model(data)
-    
+
     # Calculate loss
     #Cross entropy loss
     #loss = F.nll_loss(y_pred, target)
     loss = loss_function(y_pred,target)
     #
-    
+
     ##Add L1 Loss
     l1 = 0
     for p in model.parameters():
       p_tensor = torch.sum(torch.abs(p))
       l1 += p_tensor
-    
+
     loss = loss + l1_lamda * l1
-    
+
     #train_losses.append(loss)
-    
+
     # Backpropagation
     loss.backward()
     optimizer.step()
-    
+
     # Update pbar-tqdm
-    
+
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
     correct += pred.eq(target.view_as(pred)).sum().item()
     processed += len(data)
-    
+
     pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
     #train_acc.append(100*correct/processed)
   return loss;
@@ -667,7 +669,7 @@ def test(model, device, test_loader,test_losses,test_acc):
     test_fail_data = []
     test_fail_target = []
     test_pred_target = []
-    
+
     model.eval()
     test_loss = 0
     correct = 0
@@ -685,14 +687,15 @@ def test(model, device, test_loader,test_losses,test_acc):
                 test_fail_target.append(target[i])
                 test_pred_target.append(pred[i])
                 #print(target[i])
-    
+
     test_losses.append(test_loss)
-    
+
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
-    
+
     test_acc.append(100. * correct / len(test_loader.dataset))
-    
+
     return test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target;
+```
 
