@@ -117,7 +117,6 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
   print(' '.join('%5s' % classes[test_10_pred_target[j]] for j in range(0,n)))
 
   grid = torchvision.utils.make_grid(torch.stack(test_10_images).cpu(), nrow=5)
-  plt.figure(figsize=(5,5))
   plt.imshow(np.transpose(grid, (1,2,0)))
   plt.show()
 
@@ -179,13 +178,11 @@ def gradCAM(model,device,test_loader,num_images):
           img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
           #tran = transforms.ToTensor()
           plt.subplot(4, n*2/4, counter)
-          plt.figure(figsize=(5,5))
           plt.imshow(img)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           counter = counter + 1
           plt.subplot(4, n*2/4, counter)
-          plt.figure(figsize=(5,5))
           plt.imshow(gradcam)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
