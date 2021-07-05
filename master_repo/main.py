@@ -32,6 +32,7 @@ parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Speci
 
 args = parser.parse_args()
 
+print(args.dataset)
 if args.dataset is "CIFAR10":
     mean = [0.4914 , 0.4822 , 0.4465]
 
