@@ -119,6 +119,7 @@ def show_images(test_fail_data,test_fail_target,test_pred_target,n):
   grid = torchvision.utils.make_grid(torch.stack(test_10_images).cpu(), nrow=5)
   plt.figure(figsize=(5,5))
   plt.imshow(np.transpose(grid, (1,2,0)))
+  plt.show()
 
 def unnorm_img(img):
   img = img.cpu()
@@ -151,6 +152,7 @@ def gradCAM(model,device,test_loader,num_images):
 
         if not x:
           if num_images <= 0:
+            plt.show()
             break
           counter = counter+1
           prediction = output[k][pred[k].unsqueeze(dim=1)]
