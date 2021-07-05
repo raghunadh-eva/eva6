@@ -36,7 +36,6 @@ args = parser.parse_args()
 
 if args.dataset == "CIFAR10":
     mean = [0.4914 , 0.4822 , 0.4465]
-
     std = [0.247 , 0.2435 , 0.2616]
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
@@ -147,8 +146,6 @@ for epoch in range(args.epochs):
     train(model, device, train_loader, optimizer,loss_function)
     scheduler.step()
     test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
-
-    print(test_losses, test_acc)
 
 show_test_validation_plots(test_losses,test_acc,args.epochs)
 

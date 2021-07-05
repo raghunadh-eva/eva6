@@ -27,7 +27,7 @@ from torchvision.utils import save_image
 
 def get_data_mean_std():
 
-  if args.dataset is "CIFAR10":
+  if args.dataset == "CIFAR10":
       train_nonorm_transforms = transforms.Compose([transforms.ToTensor()])
       test_nonorm_transforms  = transforms.Compose([transforms.ToTensor()])
       dataloader_args = dict(shuffle=True, batch_size=args.batch_size, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
@@ -180,12 +180,14 @@ def gradCAM(model,device,test_loader,num_images):
           #tran = transforms.ToTensor()
           plt.subplot(4, n*2/4, counter)
           plt.imshow(img)
+          plt.axis('off')
+          plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           counter = counter + 1
           plt.subplot(4, n*2/4, counter)
           plt.imshow(gradcam)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
-          plt.subplots_adjust(top=3, bottom=2, left=3, right=5)
+          plt.subplots_adjust(top=6, bottom=4, left=3, right=5)
           num_images = num_images - 1;
       break
 
