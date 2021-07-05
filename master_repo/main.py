@@ -17,7 +17,14 @@ import torch.optim.lr_scheduler as StepLR
 #import eva6.master_repo.models
 #import eva6.master_repo.utils
 
-#import argparse
+import argparse
 
-def p:
-    print('reach')
+parser = argparse.ArgumentParser(description='Call the main the function with arguments to perform tranining/validation')
+parser.add_argument("-d", "--dataset", help='specify the dataset to be used, MNIST,CIFAR10')
+parser.add_argument("-b", "--batch_size", type=int, help="specify the batch_size to be used. default: 64",default=64)
+parser.add_argument("-e", "--epochs", type=int, help="specify the epochs to be used. default: 1",default=1)
+parser.add_argument("-drop","--dropout_perc", type=float, help="specify the dropout perc to be used. default: 0.05",default=0.05)
+parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
+parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
+args = parser.parse_args()
+#return args.d,args.b
