@@ -32,14 +32,14 @@ parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Speci
 
 args = parser.parse_args()
 
-if args.dataset is 'CIFAR10':
+if args.dataset is "CIFAR10":
     mean = [0.4914 , 0.4822 , 0.4465]
 
     std = [0.247 , 0.2435 , 0.2616]
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-elif args.dataset is 'MNIST':
+elif args.dataset is "MNIST":
     print("MNIST data")
 else:
     raise Exception("The dataset provided is not supported")
