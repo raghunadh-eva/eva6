@@ -176,7 +176,8 @@ def gradCAM(model,device,test_loader,num_images):
           #tran = transforms.ToTensor()
           plt.subplot(4, n*2/4, counter)
           plt.imshow(img)
-          plt.subplot(4, n*2/4, counter+1)
+          counter = counter + 1
+          plt.subplot(4, n*2/4, counter)
           plt.imshow(gradcam)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
