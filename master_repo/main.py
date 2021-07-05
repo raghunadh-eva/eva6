@@ -122,7 +122,7 @@ else:
 if args.scheduler == 'StepLR':
     scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
 elif args.scheduler == 'ROP':
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, verbose=True)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, gamma=0.7, verbose=True)
 else :
     raise Exception("The specified scheduler doesnt exist")
 
