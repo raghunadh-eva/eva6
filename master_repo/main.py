@@ -32,8 +32,6 @@ parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Speci
 
 args = parser.parse_args()
 
-print(args.dataset)
-
 if args.dataset == "CIFAR10":
     mean = [0.4914 , 0.4822 , 0.4465]
 
@@ -41,7 +39,10 @@ if args.dataset == "CIFAR10":
 
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
-elif args.dataset is "MNIST":
+    h = 32
+    w = 32
+
+elif args.dataset == "MNIST":
     print("MNIST data")
 else:
     raise Exception("The dataset provided is not supported")
@@ -58,27 +59,27 @@ train_transforms  = transforms.Compose([
 train_transforms_a = A.Compose([
                                 A.Normalize(mean=(mean[0], mean[1], mean[2]), std=(std[0], std[1], std[2])),
                                 A.Sequential([
-                                A.PadIfNeeded(
-                                    min_height=36,
-                                    min_width=36,
-                                    border_mode=cv2.BORDER_CONSTANT,
-                                    value=(mean[0],mean[1],mean[2])
-                                ),
-                                A.RandomCrop(
-                                     height=32,
-                                     width=32
-                                )
-                              ], p = 0.5),
+                                    A.PadIfNeeded(
+                                        min_height=h+4,
+                                        min_width=w+4,
+                                        border_mode=cv2.BORDER_CONSTANT,
+                                        value=(mean[0],mean[1],mean[2])
+                                        ),
+                                        A.RandomCrop(
+                                        height=h,
+                                        width=w
+                                        )
+                                ], p = 0.5),
                      #A.Cutout(num_holes=1,max_h_size=16,max_w_size=16,fill_value=(0.4914,0.4822,0.4465))
                      A.CoarseDropout(max_holes=1,max_height=16,max_width=16,min_holes=1,min_height=16,min_width=16,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
                      Apy.ToTensorV2()
                      ])
 
-if args.dataset is 'CIFAR10':
+if args.dataset == 'CIFAR10':
     train = data_albumentations(datasets.CIFAR10,train=True,  download=True, transform=train_transforms_a)
     test =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
 
-elif args.dataset is 'MNIST':
+elif args.dataset == 'MNIST':
     print("place holder for mnist data")
 else:
     raise Exception("The dataset provided is not supported")
@@ -97,20 +98,20 @@ if cuda:
 device = torch.device("cuda" if cuda else "cpu")
 print(device)
 
-if args.model is "resnet18":
+if args.model == "resnet18":
     model = ResNet18().to(device)
 
-if args.dataset is "CIFAR10":
+if args.dataset == "CIFAR10":
     summary(model, input_size=(3, 32, 32))
 
-if args.optimizer is 'SGD':
+if args.optimizer == 'SGD':
     optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
 else:
     raise Exception("The specified optimizer doesnt exist")
 
-if args.scheduler is 'StepLR':
+if args.scheduler == 'StepLR':
     scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
-elif args.scheduler is 'ROP':
+elif args.scheduler == 'ROP':
     scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
 else :
     raise Exception("The specified scheduler doesnt exist")
