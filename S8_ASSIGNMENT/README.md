@@ -4,9 +4,119 @@ https://github.com/raghunadh-eva/eva6/tree/master/master_repo
 
 <u>**MIS-CLASSIFIED IMAGES  & gradcam output**</u>
 
+<img src="MISCLASSIFIED_IMAGES.JPG" alt="MISCLASSIFIED_IMAGES" style="zoom:200%;" />
 
 
 
+**TEST/VALIDATION PLOTS:**
+
+<img src="Test_Accuracy_plots.JPG" alt="Test_Accuracy_plots" style="zoom:200%;" />
+
+**TRAINING LOGS**
+
+```
+Epoch 0, lr 0.02
+Loss=6.493502140045166 Batch_id=390 Accuracy=16.49: 100%|██████████| 391/391 [02:22<00:00,  2.75it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -7059.6160, Accuracy: 2324/10000 (23.24%)
+
+Epoch 1, lr 0.02
+Loss=3.5925793647766113 Batch_id=390 Accuracy=27.13: 100%|██████████| 391/391 [02:24<00:00,  2.70it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -14112.9298, Accuracy: 3166/10000 (31.66%)
+
+Epoch 2, lr 0.02
+Loss=2.948284149169922 Batch_id=390 Accuracy=33.24: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -15832.5601, Accuracy: 4013/10000 (40.13%)
+
+Epoch 3, lr 0.02
+Loss=2.5798251628875732 Batch_id=390 Accuracy=37.13: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -20006.4496, Accuracy: 3909/10000 (39.09%)
+
+Epoch 4, lr 0.02
+Loss=2.309041738510132 Batch_id=390 Accuracy=40.44: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -21510.9391, Accuracy: 4767/10000 (47.67%)
+
+Epoch 5, lr 0.02
+Loss=2.0857112407684326 Batch_id=390 Accuracy=44.08: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -28035.2995, Accuracy: 5057/10000 (50.57%)
+
+Epoch 6, lr 0.02
+Loss=1.7955379486083984 Batch_id=390 Accuracy=47.08: 100%|██████████| 391/391 [02:23<00:00,  2.73it/s]
+Epoch     7: reducing learning rate of group 0 to 1.4000e-02.
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -32078.9918, Accuracy: 5393/10000 (53.93%)
+
+Epoch 7, lr 0.013999999999999999
+Loss=1.8677756786346436 Batch_id=390 Accuracy=50.43: 100%|██████████| 391/391 [02:22<00:00,  2.74it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -32053.3330, Accuracy: 5413/10000 (54.13%)
+
+Epoch 8, lr 0.013999999999999999
+Loss=2.1843209266662598 Batch_id=390 Accuracy=53.12: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -34566.8469, Accuracy: 5726/10000 (57.26%)
+
+Epoch 9, lr 0.013999999999999999
+Loss=1.8700530529022217 Batch_id=390 Accuracy=54.35: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -37987.5765, Accuracy: 6088/10000 (60.88%)
+
+Epoch 10, lr 0.013999999999999999
+Loss=2.048628330230713 Batch_id=390 Accuracy=55.83: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -37410.0735, Accuracy: 6154/10000 (61.54%)
+
+Epoch 11, lr 0.013999999999999999
+Loss=1.6341745853424072 Batch_id=390 Accuracy=56.87: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -39235.6081, Accuracy: 6125/10000 (61.25%)
+
+Epoch 12, lr 0.013999999999999999
+Loss=1.8169020414352417 Batch_id=390 Accuracy=57.68: 100%|██████████| 391/391 [02:23<00:00,  2.73it/s]
+Epoch    13: reducing learning rate of group 0 to 9.8000e-03.
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -41973.3827, Accuracy: 6099/10000 (60.99%)
+
+Epoch 13, lr 0.009799999999999998
+Loss=1.8838319778442383 Batch_id=390 Accuracy=60.51: 100%|██████████| 391/391 [02:23<00:00,  2.73it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -43122.4803, Accuracy: 6316/10000 (63.16%)
+
+Epoch 14, lr 0.009799999999999998
+Loss=1.6362437009811401 Batch_id=390 Accuracy=60.85: 100%|██████████| 391/391 [02:22<00:00,  2.74it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -42418.2361, Accuracy: 6228/10000 (62.28%)
+
+Epoch 15, lr 0.009799999999999998
+Loss=1.7381185293197632 Batch_id=390 Accuracy=61.55: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -42470.9836, Accuracy: 6423/10000 (64.23%)
+
+Epoch 16, lr 0.009799999999999998
+Loss=1.5552144050598145 Batch_id=390 Accuracy=62.05: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -47519.8326, Accuracy: 6832/10000 (68.32%)
+
+Epoch 17, lr 0.009799999999999998
+Loss=1.855047345161438 Batch_id=390 Accuracy=62.20: 100%|██████████| 391/391 [02:24<00:00,  2.71it/s]
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -45507.8275, Accuracy: 6701/10000 (67.01%)
+
+Epoch 18, lr 0.009799999999999998
+Loss=1.441567301750183 Batch_id=390 Accuracy=62.97: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+Epoch    19: reducing learning rate of group 0 to 6.8600e-03.
+  0%|          | 0/391 [00:00<?, ?it/s]
+Test set: Average loss: -45512.9371, Accuracy: 6763/10000 (67.63%)
+
+Epoch 19, lr 0.006859999999999998
+Loss=1.6019688844680786 Batch_id=390 Accuracy=64.87: 100%|██████████| 391/391 [02:23<00:00,  2.72it/s]
+Test set: Average loss: -47542.9319, Accuracy: 6906/10000 (69.06%)
+```
 
 **COLAB IMPLEMENTATION**
 
@@ -34,7 +144,7 @@ https://github.com/raghunadh-eva/eva6/tree/master/master_repo
 
 %matplotlib inline
 
-%run main.py -d "CIFAR10" -e 20 -m "resnet18_ln" -sch "ROP"
+%run main.py -d "CIFAR10" -e 20 -m "resnet18_ln" -sch "ROP" -num_images 20
 
 **MAIN.PY**
 
@@ -478,13 +588,11 @@ def gradCAM(model,device,test_loader,num_images):
           img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
           #tran = transforms.ToTensor()
           plt.subplot(4, n*2/4, counter)
-          plt.figure(figsize=(5,5))
           plt.imshow(img)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           counter = counter + 1
           plt.subplot(4, n*2/4, counter)
-          plt.figure(figsize=(5,5))
           plt.imshow(gradcam)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
