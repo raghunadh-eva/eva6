@@ -138,7 +138,7 @@ for epoch in range(args.epochs):
     scheduler.step()
     test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
 
-    print(test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target)
+    print(test_losses, test_acc)
 
 show_test_validation_plots(test_losses,test_acc,args.epochs)
 

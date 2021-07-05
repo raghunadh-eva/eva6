@@ -141,6 +141,7 @@ def gradCAM(model,device,test_loader,num_images):
     test_failed_data = []
 
     counter = 0
+    n = num_images
 
     for data, target in test_loader:
       data, target = data.to(device), target.to(device)
@@ -175,9 +176,11 @@ def gradCAM(model,device,test_loader,num_images):
           heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
           superimposed_img = cv2.addWeighted(img, 0.6, heatmap, 0.4, 0)
           gradcam = cv2.cvtColor(superimposed_img, cv2.COLOR_BGR2RGB)
-          tran = transforms.ToTensor()
-          plt.subplot(2, 5, counter)
+          img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+          #tran = transforms.ToTensor()
+          plt.subplot(4, n*2, 2*counter)
           plt.imshow(gradcam)
+          plt.imshow(img)
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           plt.subplots_adjust(top=3, bottom=2, left=3, right=5)
