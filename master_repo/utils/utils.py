@@ -19,9 +19,8 @@ import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
 import albumentations.pytorch as ToTensorV2
-import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
-
+from tqdm import tqdm
 
 def get_data_mean_std():
 
