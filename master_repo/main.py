@@ -30,5 +30,5 @@ parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. S
 parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 args = parser.parse_args()
 
-print(args.d,args.b,args.e,args.drop,args.opt,args.sch)
+print(args.dataset,args.batch_size,args.epochs,args.dropout_perc,args.optimizer,args.scheduler)
 #return args.d,args.b
