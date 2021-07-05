@@ -40,6 +40,7 @@ if args.dataset is 'CIFAR10':
     classes = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
 
 elif args.dataset is 'MNIST':
+    print("MNIST data")
 else:
     raise Exception("The dataset provided is not supported")
 
@@ -76,6 +77,7 @@ if args.dataset is 'CIFAR10':
     test =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
 
 elif args.dataset is 'MNIST':
+    print("place holder for mnist data")
 else:
     raise Exception("The dataset provided is not supported")
 
