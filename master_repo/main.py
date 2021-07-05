@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import torch
 import torch.nn as nn
@@ -29,4 +29,6 @@ parser.add_argument("-drop","--dropout_perc", type=float, help="specify the drop
 parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
 parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 args = parser.parse_args()
+
+print(args.d,args.b,args.e,args.drop,args.opt,args.sch)
 #return args.d,args.b
