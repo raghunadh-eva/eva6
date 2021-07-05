@@ -142,6 +142,6 @@ for epoch in range(args.epochs):
 
 show_test_validation_plots(test_losses,test_acc,args.epochs)
 
-show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images)
+show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images_gradcam)
 
-gradCAM(model,device,test_loader,args.num_images)
+gradCAM(model,device,test_loader,args.num_images_gradcam)
