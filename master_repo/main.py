@@ -28,4 +28,5 @@ def main(argv=None):
     parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
     parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 
+    args = parser.parse_args()
     return args.d,args.b
