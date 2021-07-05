@@ -14,7 +14,7 @@ import torchvision.datasets as datasets
 import torchvision.utils as utils
 import albumentations.pytorch as Apy
 import torch.optim.lr_scheduler as StepLR
-import torchvision.utils.save_image as save_image
+from torchvision.utils import save_image
 
 from torchsummary import summary
 from tqdm import tqdm
