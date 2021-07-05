@@ -196,7 +196,6 @@ class data_albumentations_cifar10(datasets.CIFAR10):
 
 
 def train(model, device, train_loader, optimizer,loss_function):
-  global loss_functioin
 
   model.train()
   pbar = tqdm(train_loader)
@@ -246,9 +245,7 @@ def train(model, device, train_loader, optimizer,loss_function):
     pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
     #train_acc.append(100*correct/processed)
 
-def test(model, device, test_loader):
-    global test_losses
-    global test_acc
+def test(model, device, test_loader,test_losses,test_acc):
 
     test_fail_data = []
     test_fail_target = []

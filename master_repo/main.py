@@ -24,7 +24,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Call the main the function with arguments to perform tranining/validation')
 parser.add_argument("-d", "--dataset", help='specify the dataset to be used, MNIST,CIFAR10.',required=True)
-parser.add_argument("-b", "--batch_size", type=int, help="specify the batch_size to be used. default: 64",default=64)
+parser.add_argument("-b", "--batch_size", type=int, help="specify the batch_size to be used. default: 128",default=128)
 parser.add_argument("-e", "--epochs", type=int, help="specify the epochs to be used. default: 1",default=1)
 parser.add_argument("-m","--model" , help="Specify the model to use. default=resnet18",default="resnet18")
 parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
@@ -136,7 +136,9 @@ for epoch in range(args.epochs):
 
     train(model, device, train_loader, optimizer)
     scheduler.step()
-    test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader)
+    test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
+
+    print(test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target)
 
 show_test_validation_plots(test_losses,test_acc,args.epochs)
 
