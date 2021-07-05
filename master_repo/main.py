@@ -24,7 +24,7 @@ def main(argv=None):
     parser.add_argument("-d", "--dataset", help="specify the dataset to be used. E.g., MNIST,CIFAR10",required=True)
     parser.add_argument("-b", "--batch_size", type=int, help="specify the batch_size to be used. default: 64",default=64)
     parser.add_argument("-e", "--epochs", type=int, help="specify the epochs to be used. default: 1",default=1)
-    parser.add_argument("-drop","--dropout_perc" type=float, help="specify the dropout perc to be used. default: 0.05",default=0.05)
+    parser.add_argument("-drop","--dropout_perc", type=float, help="specify the dropout perc to be used. default: 0.05",default=0.05)
     parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
     parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 
