@@ -185,11 +185,11 @@ def gradCAM(model,device,test_loader,num_images):
           num_images = num_images - 1;
       break
 
-class data_albumentations():
+class data_albumentations(dataset):
     def __init__(self, dataset=datasets.CIFAR10, root="~/data/", train=True, download=True, transform=None):
-        super().__init__(dataset=dataset,root=root, train=train, download=download, transform=transform)
+        super(data_albumentations,self).__init__(dataset=dataset,root=root, train=train, download=download, transform=transform)
     def __getitem__(self, index):
-        image, label = self.dataset.data[index], self.dataset.targets[index]
+        image, label = self.data[index], self.targets[index]
         if self.transform is not None:
             transformed = self.transform(image=image)
             image = transformed["image"]
