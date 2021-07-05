@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import albumentations as A
 import cv2
+from torchsummary import summary
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
 import torchvision.utils as utils
