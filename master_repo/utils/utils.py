@@ -22,34 +22,24 @@ import albumentations.pytorch as ToTensorV2
 import tqdm as tqdm
 import torch.optim.lr_scheduler as StepLR
 
-train_nonorm_transforms = transforms.Compose([
-                                       transforms.ToTensor()
-                                      ])
-test_nonorm_transforms  = transforms.Compose([
-                                       transforms.ToTensor()
-                                      ])
 
-cuda = torch.cuda.is_available()
-#what happens when SEED = 2 ?
-SEED = 1
-torch.manual_seed(SEED)
+def get_data_mean_std():
 
-#set the seed for GPU device as well
-if cuda:
-  torch.cuda.manual_seed(SEED)
-
-dataloader_args = dict(shuffle=True, batch_size=128, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
-
-train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
-test_nonorm =  datasets.CIFAR10('./data_nonorm', train=False, download=True, transform=test_nonorm_transforms)
-train_loader_nonorm = torch.utils.data.DataLoader(train_nonorm, **dataloader_args)
-test_loader_nonorm  = torch.utils.data.DataLoader(test_nonorm, **dataloader_args)
-
-def get_data_mean_std(train_nonorm,train_loader_nonorm,test_nonorm,test_loader_nonorm,h,w):
-  chsum = 0
+  if args.dataset is "CIFAR10":
+      train_nonorm_transforms = transforms.Compose([transforms.ToTensor()])
+      test_nonorm_transforms  = transforms.Compose([transforms.ToTensor()])
+      dataloader_args = dict(shuffle=True, batch_size=args.batch_size, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
+      train_nonorm = datasets.CIFAR10('./data_nonorm', train=True,  download=True, transform=train_nonorm_transforms)
+      test_nonorm =  datasets.CIFAR10('./data_nonorm', train=False, download=True, transform=test_nonorm_transforms)
+      train_loader_nonorm = torch.utils.data.DataLoader(train_nonorm, **dataloader_args)
+      test_loader_nonorm  = torch.utils.data.DataLoader(test_nonorm, **dataloader_args)
+      h = 32
+      w = 32
 
   for index, (data,target) in enumerate(train_loader_nonorm):
     chsum += data.sum(dim=(0,2,3),keepdim=True)
+
+  chsum = 0
 
   mean = chsum / (len(train_nonorm) * h * w)
   train_mean = mean
@@ -194,3 +184,96 @@ def gradCAM(model,device,test_loader,num_images):
           plt.subplots_adjust(top=3, bottom=2, left=3, right=5)
           num_images = num_images - 1;
       break
+
+class data_albumentations(datasets):
+    def __init__(self, root="~/data/", train=True, download=True, transform=None):
+        super().__init__(root=root, train=train, download=download, transform=transform)
+    def __getitem__(self, index):
+        image, label = self.data[index], self.targets[index]
+        if self.transform is not None:
+            transformed = self.transform(image=image)
+            image = transformed["image"]
+            return image, label
+
+
+def train(model, device, train_loader, optimizer):
+  model.train()
+  pbar = tqdm(train_loader)
+
+  l1_lamda = 0.0001
+
+  correct = 0
+  processed = 0
+  for batch_idx, (data, target) in enumerate(pbar):
+    # get samples
+    data, target = data.to(device), target.to(device)
+
+    # Init
+    optimizer.zero_grad()
+    # In PyTorch, we need to set the gradients to zero before starting to do backpropragation because PyTorch accumulates the gradients on subsequent backward passes.
+    # Because of this, when you start your training loop, ideally you should zero out the gradients so that you do the parameter update correctly.
+
+    # Predict
+    y_pred = model(data)
+
+    # Calculate loss
+    #Cross entropy loss
+    #loss = F.nll_loss(y_pred, target)
+    loss = loss_function(y_pred,target)
+    #
+
+    ##Add L1 Loss
+    l1 = 0
+    for p in model.parameters():
+      p_tensor = torch.sum(torch.abs(p))
+      l1 += p_tensor
+
+    loss = loss + l1_lamda * l1
+
+    train_losses.append(loss)
+
+    # Backpropagation
+    loss.backward()
+    optimizer.step()
+
+    # Update pbar-tqdm
+
+    pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
+    correct += pred.eq(target.view_as(pred)).sum().item()
+    processed += len(data)
+
+    pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
+    train_acc.append(100*correct/processed)
+
+def test(model, device, test_loader):
+    test_fail_data = []
+    test_fail_target = []
+    test_pred_target = []
+
+    model.eval()
+    test_loss = 0
+    correct = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            output = model(data)
+            test_loss += F.nll_loss(output, target, reduction='sum').item()  # sum up batch loss
+            pred = output.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
+            #print(pred,target.view_as(pred))
+            correct += pred.eq(target.view_as(pred)).sum().item()
+            for i,x in enumerate(pred.eq(target.view_as(pred))):
+              if not x:
+                test_fail_data.append(data[i])
+                test_fail_target.append(target[i])
+                test_pred_target.append(pred[i])
+                #print(target[i])
+
+    test_losses.append(test_loss)
+
+    print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.2f}%)\n'.format(
+        test_loss, correct, len(test_loader.dataset),
+        100. * correct / len(test_loader.dataset)))
+
+    test_acc.append(100. * correct / len(test_loader.dataset))
+
+    return test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target;
