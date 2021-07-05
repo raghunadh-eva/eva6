@@ -229,7 +229,7 @@ def train(model, device, train_loader, optimizer,loss_function):
 
     loss = loss + l1_lamda * l1
 
-    train_losses.append(loss)
+    #train_losses.append(loss)
 
     # Backpropagation
     loss.backward()
@@ -242,7 +242,7 @@ def train(model, device, train_loader, optimizer,loss_function):
     processed += len(data)
 
     pbar.set_description(desc= f'Loss={loss.item()} Batch_id={batch_idx} Accuracy={100*correct/processed:0.2f}')
-    train_acc.append(100*correct/processed)
+    #train_acc.append(100*correct/processed)
 
 def test(model, device, test_loader):
     test_fail_data = []
