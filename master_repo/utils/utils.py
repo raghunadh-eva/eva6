@@ -190,8 +190,6 @@ def gradCAM(model,device,test_loader,num_images):
           plt.axis('off')
           plt.title("actual: %s\npredicted: %s" % (classes[target[k]], classes [pred[k]]), fontsize=8)
           plt.subplots_adjust(top=6, bottom=4, left=3, right=5)
-            plt.figure(figsize=(5,5))
-
           num_images = num_images - 1;
       break
 
