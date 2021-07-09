@@ -74,7 +74,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(512),
                             nn.ReLU()
                          )
-        self.layer2 =    self._make_layer(block, 512, num_blocks[2], stride=2)
+        self.layer3 =    self._make_layer(block, 512, num_blocks[2], stride=2)
 
         self.pool1 = nn.MaxPool2d(4,4)
 
