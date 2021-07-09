@@ -80,6 +80,7 @@ class ResNetCustom(nn.Module):
 
         self.linear = nn.Linear(512*block.expansion, num_classes)
 
+        self.softmax = nn.Softmax(dim=-1)
 
     def _make_layer(self, block, planes, num_blocks, stride):
         strides = [stride] + [1]*(num_blocks-1)
@@ -100,7 +101,7 @@ class ResNetCustom(nn.Module):
 
         out = self.linear(out)
 
-        return nn.Softmax(out, dim=-1)
+        return self.softmax(out)
 
 def ResNetCustomS9():
     return ResNetCustom(BasicBlock_c, [2, 2, 2, 2])
