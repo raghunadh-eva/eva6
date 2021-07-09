@@ -145,13 +145,6 @@ if args.optimizer == 'SGD':
 else:
     raise Exception("The specified optimizer doesnt exist")
 
-if args.scheduler == 'StepLR':
-    scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
-elif args.scheduler == 'ROP':
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
-else :
-    raise Exception("The specified scheduler doesnt exist")
-
 dataloader_args = dict(shuffle=True, batch_size=args.batch_size, num_workers=2, pin_memory=True) if cuda else dict(shuffle=True, batch_size=64)
 #Why change batch_size for CPU - since it should not matter
 
@@ -173,6 +166,13 @@ if args.lr_finder:
     lr_finder.plot() # to inspect the loss-learning rate graph
     lr_finder.reset()
 else:
+    if args.scheduler == 'StepLR':
+        scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
+    elif args.scheduler == 'ROP':
+        scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
+    else :
+        raise Exception("The specified scheduler doesnt exist")
+        
     for epoch in range(args.epochs):
         print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
