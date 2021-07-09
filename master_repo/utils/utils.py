@@ -201,7 +201,7 @@ class data_albumentations_cifar10(datasets.CIFAR10):
             return image, label
 
 
-def train(model, device, train_loader, optimizer,loss_function,scheduler):
+def train(model, device, train_loader, optimizer,loss_function,scheduler,is_onelr):
 
   model.train()
   pbar = tqdm(train_loader)
@@ -241,7 +241,7 @@ def train(model, device, train_loader, optimizer,loss_function,scheduler):
     # Backpropagation
     loss.backward()
     optimizer.step()
-    if scheduler == "OneLR":
+    if is_onelr == "OneLR":
         scheduler.step()
     # Update pbar-tqdm
 

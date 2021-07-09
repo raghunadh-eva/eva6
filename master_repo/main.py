@@ -190,7 +190,7 @@ else:
     for epoch in range(args.epochs):
         print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
-        loss = train(model, device, train_loader, optimizer,loss_function,args.scheduler)
+        loss = train(model, device, train_loader, optimizer,loss_function,scheduler,args.scheduler)
         if args.scheduler == 'ROP':
             total_train_loss += loss
             scheduler.step(total_train_loss)
