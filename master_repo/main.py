@@ -34,7 +34,8 @@ parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. S
 parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Specify the num of images to apply gradcam in. default=10",default=10)
 parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generate gcam output", action="store_true")
 parser.add_argument("-s","--eva_session" ,type=int ,help="Specify the assignment key", required=True)
-parser.add_argument("-lr","--lr_finder" , help="Find the LR", action="store_true")
+parser.add_argument("-lr","--lr_value" ,type=float, "The Learning rate to start with",default=0.02)
+parser.add_argument("-find_lr","--lr_finder" , help="Find the LR", action="store_true")
 parser.add_argument("-lr_type","--lr_finder_type" , help="Specify the lr increase type. exp/linear", default="")
 
 args = parser.parse_args()
@@ -142,7 +143,7 @@ else:
     raise Exception("The input dataset is not supported")
 
 if args.optimizer == 'SGD':
-    optimizer = optim.SGD(model.parameters(), lr=0.02, momentum=0.9)
+    optimizer = optim.SGD(model.parameters(), lr=args.lr_value, momentum=0.9)
 else:
     raise Exception("The specified optimizer doesnt exist")
 
@@ -165,7 +166,7 @@ if args.lr_finder:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
-        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=100, step_mode=args.lr_finder_type)
+        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=12288, step_mode=args.lr_finder_type)
         lr_finder.plot(log_lr=False)
         lr_finder.plot() # to inspect the loss-learning rate graph
         lr_finder.reset()
