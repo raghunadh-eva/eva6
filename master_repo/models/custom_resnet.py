@@ -43,6 +43,7 @@ class BasicBlock_c(nn.Module):
 class ResNetCustom(nn.Module):
     def __init__(self, block, num_blocks, num_classes=10):
         super(ResNetCustom, self).__init__()
+
         self.in_planes = 64
 
         self.conv0  =    nn.Conv2d(3, 64, kernel_size=3,stride=1, padding=1, bias=False)
@@ -100,5 +101,5 @@ class ResNetCustom(nn.Module):
         out = self.linear(out)
         return out
 
-def ResNet18_custom():
+def ResNetCustomS9():
     return ResNetCustom(BasicBlock_c, [2, 2, 2, 2])
