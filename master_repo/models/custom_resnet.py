@@ -99,8 +99,8 @@ class ResNetCustom(nn.Module):
         out = out.view(out.size(0), -1)
 
         out = self.linear(out)
-        
-        return F.log_softmax(out, dim=-1)
+
+        return nn.Softmax(out, dim=-1)
 
 def ResNetCustomS9():
     return ResNetCustom(BasicBlock_c, [2, 2, 2, 2])
