@@ -32,6 +32,7 @@ parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. S
 parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Specify the num of images to apply gradcam in. default=10",default=10)
 parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generate gcam output", action="store_true")
+parser.add_argument("-s","--eva_session" ,type=int ,help="Specify the assignment key", required=True)
 
 args = parser.parse_args()
 
@@ -58,7 +59,27 @@ train_transforms  = transforms.Compose([
                                         transforms.ToTensor(),
                                         transforms.Normalize((mean[0],mean[1],mean[2]), (std[0],std[1],std[2]))
                                       ])
-train_transforms_a = A.Compose([
+if args.eva_session == 9:
+    train_transforms_a = A.Compose([
+                                A.Normalize(mean=(mean[0], mean[1], mean[2]), std=(std[0], std[1], std[2])),
+                                A.Sequential([
+                                    A.PadIfNeeded(
+                                        min_height=h+4,
+                                        min_width=w+4,
+                                        border_mode=cv2.BORDER_CONSTANT,
+                                        value=(mean[0],mean[1],mean[2])
+                                        ),
+                                        A.RandomCrop(
+                                        height=h,
+                                        width=w
+                                        )
+                                ], p = 0.5),
+                                A.HorizontalFlip(),
+                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
+                                Apy.ToTensorV2()
+                        ])
+elif:
+    train_transforms_a = A.Compose([
                                 A.Normalize(mean=(mean[0], mean[1], mean[2]), std=(std[0], std[1], std[2])),
                                 A.Sequential([
                                     A.PadIfNeeded(
