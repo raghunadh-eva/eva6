@@ -106,7 +106,7 @@ if args.model == "resnet18":
 elif args.model == "resnet18_ln":
     model = ResNet18_ln().to(device)
 elif args.model == "custom_resnet":
-    model = Resnet18_custom().to(device)
+    model = ResNet18_custom().to(device)
 else:
     raise Exception("The input model type is not supported")
 
