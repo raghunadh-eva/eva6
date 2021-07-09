@@ -52,7 +52,7 @@ class ResNet(nn.Module):
             self._make_layer(block, 64, num_blocks[0], stride=1),
             self._make_layer(block, 128, num_blocks[1], stride=2),
             self._make_layer(block, 256, num_blocks[2], stride=2),
-            self._make_layer(block, 512, num_blocks[3], stride=1)
+            self._make_layer(block, 512, num_blocks[3], stride=2)
         )
         self.linear = nn.Linear(512*block.expansion, num_classes)
 
