@@ -35,6 +35,7 @@ parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Speci
 parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generate gcam output", action="store_true")
 parser.add_argument("-s","--eva_session" ,type=int ,help="Specify the assignment key", required=True)
 parser.add_argument("-lr","--lr_finder" , help="Find the LR", action="store_true")
+parser.add_argument("-lr_type","--lr_finder_type" , help="Specify the lr increase type. exp/linear", default="")
 
 args = parser.parse_args()
 
@@ -161,15 +162,16 @@ test_acc = []
 total_train_loss = 0
 
 if args.lr_finder:
-    lr_finder = LRFinder(model, optimizer, loss_function, device=device)
-    lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
-    lr_finder.plot() # to inspect the loss-learning rate graph
-    lr_finder.reset()
+    if args.lr_finder_type == "exp" || args.lr_finder_type == "linear":
+        lr_finder = LRFinder(model, optimizer, loss_function, device=device)
+        #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
+        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=100, step_mode=args.lr_finder_type)
+        lr_finder.plot(log_lr=False)
+        lr_finder.plot() # to inspect the loss-learning rate graph
+        lr_finder.reset()
+    else:
+        raise Exception("Unknown lr step_mode type")
 
-    lr_finder = LRFinder(model, optimizer, loss_function, device=device)
-    lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=100, step_mode="linear")
-    lr_finder.plot(log_lr=False)
-    lr_finder.reset()
 else:
     if args.scheduler == 'StepLR':
         scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
