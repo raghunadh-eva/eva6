@@ -182,16 +182,20 @@ else:
         scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
+    elif: args.scheduler == 'OneLR':
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.8,div_factor=1.81, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=True)
     else :
         raise Exception("The specified scheduler doesnt exist")
 
     for epoch in range(args.epochs):
         print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
-        loss = train(model, device, train_loader, optimizer,loss_function)
+        loss = train(model, device, train_loader, optimizer,loss_function,args.scheduler)
         if args.scheduler == 'ROP':
             total_train_loss += loss
             scheduler.step(total_train_loss)
+        elif args.scheduler == "OneLR":
+            print("Scheduler stepping should be for every batch")
         else:
             scheduler.step()
             test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)

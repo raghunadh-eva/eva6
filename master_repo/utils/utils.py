@@ -201,7 +201,7 @@ class data_albumentations_cifar10(datasets.CIFAR10):
             return image, label
 
 
-def train(model, device, train_loader, optimizer,loss_function):
+def train(model, device, train_loader, optimizer,loss_function,scheduler):
 
   model.train()
   pbar = tqdm(train_loader)
@@ -241,7 +241,8 @@ def train(model, device, train_loader, optimizer,loss_function):
     # Backpropagation
     loss.backward()
     optimizer.step()
-
+    if scheduler == "OneLR":
+        scheduler.step()
     # Update pbar-tqdm
 
     pred = y_pred.argmax(dim=1, keepdim=True)  # get the index of the max log-probability
