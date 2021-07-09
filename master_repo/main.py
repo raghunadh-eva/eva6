@@ -17,6 +17,7 @@ import torch.optim.lr_scheduler as StepLR
 from torchvision.utils import save_image
 
 from torchsummary import summary
+from torch_lr_finder import LRFinder
 from tqdm import tqdm
 from models import *
 from utils import *
@@ -33,6 +34,7 @@ parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. S
 parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Specify the num of images to apply gradcam in. default=10",default=10)
 parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generate gcam output", action="store_true")
 parser.add_argument("-s","--eva_session" ,type=int ,help="Specify the assignment key", required=True)
+parser.add_argument("-lr","--lr_finder" , help="Find the LR", action="store_true")
 
 args = parser.parse_args()
 
@@ -165,20 +167,26 @@ test_losses = []
 test_acc = []
 total_train_loss = 0
 
-for epoch in range(args.epochs):
-    print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
+if args.lr_finder:
+    lr_finder = LRFinder(model, optimizer, loss_function, device=device)
+    lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
+    lr_finder.plot() # to inspect the loss-learning rate graph
+    lr_finder.reset()
+else:
+    for epoch in range(args.epochs):
+        print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
-    loss = train(model, device, train_loader, optimizer,loss_function)
-    if args.scheduler == 'ROP':
-        total_train_loss += loss
-        scheduler.step(total_train_loss)
-    else:
-        scheduler.step()
-    test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
+        loss = train(model, device, train_loader, optimizer,loss_function)
+        if args.scheduler == 'ROP':
+            total_train_loss += loss
+            scheduler.step(total_train_loss)
+        else:
+            scheduler.step()
+            test_losses, test_acc, test_fail_data, test_fail_target, test_pred_target = test(model, device, test_loader,test_losses,test_acc)
 
-show_test_validation_plots(test_losses,test_acc,args.epochs)
+    show_test_validation_plots(test_losses,test_acc,args.epochs)
 
-show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images_gradcam)
+    show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images_gradcam)
 
 if args.grad_cam:
     gradCAM(model,device,test_loader,args.num_images_gradcam)
