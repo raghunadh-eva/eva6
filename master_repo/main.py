@@ -31,6 +31,7 @@ parser.add_argument("-m","--model" , help="Specify the model to use. default=res
 parser.add_argument("-opt","--optimizer" , help="Specify the optimizer to use. Specify the short names. default=SGD",default="SGD")
 parser.add_argument("-sch","--scheduler" , help="Specify the scheduler to use. Specify the short names. default=StepLR",default="StepLR")
 parser.add_argument("-num_images","--num_images_gradcam" ,type =int, help="Specify the num of images to apply gradcam in. default=10",default=10)
+parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generate gcam output", action="store_true")
 
 args = parser.parse_args()
 
@@ -104,6 +105,8 @@ if args.model == "resnet18":
     model = ResNet18().to(device)
 elif args.model == "resnet18_ln":
     model = ResNet18_ln().to(device)
+elif args.model == "custom_resnet":
+    model = Resnet18_custom().to(device)
 else:
     raise Exception("The input model type is not supported")
 
@@ -156,4 +159,5 @@ show_test_validation_plots(test_losses,test_acc,args.epochs)
 
 show_images(test_fail_data,test_fail_target,test_pred_target,args.num_images_gradcam)
 
-gradCAM(model,device,test_loader,args.num_images_gradcam)
+if args.grad_cam:
+    gradCAM(model,device,test_loader,args.num_images_gradcam)
