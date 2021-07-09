@@ -36,6 +36,7 @@ parser.add_argument("-gcam","--grad_cam" ,help="Specify when you need to generat
 parser.add_argument("-s","--eva_session" ,type=int ,help="Specify the assignment key", required=True)
 parser.add_argument("-lr","--lr_value" ,type=float, help="The Learning rate to start with",default=0.02)
 parser.add_argument("-find_lr","--lr_finder" , help="Find the LR", action="store_true")
+parser.add_argument("-find_lr_val","--lr_finder_validation" , help="Use validation data for finding the learning rate graph", action="store_true")
 parser.add_argument("-lr_type","--lr_finder_type" , help="Specify the lr increase type. exp/linear", default="")
 
 args = parser.parse_args()
@@ -162,11 +163,14 @@ test_losses = []
 test_acc = []
 total_train_loss = 0
 
-if args.lr_finder:
+if args.lr_finder or args.lr_finder_validation:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
-        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=1, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+        if args.lr_finder_validation:
+            lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=1, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+        else:
+            lr_finder.range_test(train_loader, end_lr=1, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
         #lr_finder.plot(log_lr=False)
         lr_finder.plot() # to inspect the loss-learning rate graph
         lr_finder.reset()
