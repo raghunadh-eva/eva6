@@ -40,9 +40,9 @@ class BasicBlock(nn.Module):
         out = F.relu(out)
         return out
 
-class ResNet_custom(nn.Module):
+class ResNetCustom(nn.Module):
     def __init__(self, block, num_blocks, num_classes=10):
-        super(ResNet_custom, self).__init__()
+        super(ResNetCustom, self).__init__()
         self.in_planes = 64
 
         self.conv0  =    nn.Conv2d(3, 64, kernel_size=3,stride=1, padding=1, bias=False)
@@ -101,4 +101,4 @@ class ResNet_custom(nn.Module):
         return out
 
 def ResNet18_custom():
-    return ResNet_custom(BasicBlock, [2, 2, 2, 2])
+    return ResNetCustom(BasicBlock, [2, 2, 2, 2])
