@@ -13,11 +13,11 @@ import torchvision.utils as utils
 import albumentations.pytorch as ToTensorV2
 import tqdm as tqdm
 
-class BasicBlock(nn.Module):
+class BasicBlock_c(nn.Module):
     expansion = 1
 
     def __init__(self, in_planes, planes, stride=1):
-        super(BasicBlock, self).__init__()
+        super(BasicBlock_c, self).__init__()
         self.conv1 = nn.Conv2d(
             in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
@@ -89,7 +89,7 @@ class ResNetCustom(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        out = F.relu(self.bn1(self.conv1(x)))
+        out = F.relu(self.bn1(self.conv0(x)))
         out = self.conv1(out) + self.layer1(out)
         out = self.conv2(out)
         out = self.conv3(out) + self.layer3(out)
@@ -101,4 +101,4 @@ class ResNetCustom(nn.Module):
         return out
 
 def ResNet18_custom():
-    return ResNetCustom(BasicBlock, [2, 2, 2, 2])
+    return ResNetCustom(BasicBlock_c, [2, 2, 2, 2])
