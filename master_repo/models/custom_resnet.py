@@ -52,7 +52,7 @@ class ResNetCustom(nn.Module):
         ##Layer1
         self.conv1 =     nn.Sequential(
                             nn.Conv2d(64,128,kernel_size=3,stride=1,padding=1,bias=False),
-                            nn.Maxpool2d(2,2),
+                            nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(128),
                             nn.ReLU()
                          )
@@ -61,7 +61,7 @@ class ResNetCustom(nn.Module):
         #Layer2
         self.conv2 =     nn.Sequential(
                             nn.Conv2d(128,256,kernel_size=3,stride=1,padding=1,bias=False),
-                            nn.Maxpool2d(2,2),
+                            nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(256),
                             nn.ReLU()
                          )
@@ -70,7 +70,7 @@ class ResNetCustom(nn.Module):
         ##layer3
         self.conv3 =     nn.Sequential(
                             nn.Conv2d(256,512,kernel_size=3,stride=1,padding=1,bias=False),
-                            nn.Maxpool2d(2,2),
+                            nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(512),
                             nn.ReLU()
                          )
