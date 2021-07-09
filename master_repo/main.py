@@ -166,8 +166,8 @@ if args.lr_finder:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
-        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=12288, step_mode=args.lr_finder_type)
-        lr_finder.plot(log_lr=False)
+        lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=1, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+        #lr_finder.plot(log_lr=False)
         lr_finder.plot() # to inspect the loss-learning rate graph
         lr_finder.reset()
     else:
