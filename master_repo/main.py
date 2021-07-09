@@ -165,6 +165,11 @@ if args.lr_finder:
     lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
     lr_finder.plot() # to inspect the loss-learning rate graph
     lr_finder.reset()
+
+    lr_finder = LRFinder(model, optimizer, loss_function, device=device)
+    lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=100, step_mode="linear")
+    lr_finder.plot(log_lr=False)
+    lr_finder.reset()
 else:
     if args.scheduler == 'StepLR':
         scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
@@ -172,7 +177,7 @@ else:
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     else :
         raise Exception("The specified scheduler doesnt exist")
-        
+
     for epoch in range(args.epochs):
         print('Epoch {}, lr {}'.format(epoch, optimizer.param_groups[0]['lr']))
 
