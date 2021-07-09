@@ -180,11 +180,11 @@ if args.lr_finder or args.lr_finder_validation:
 else:
     if args.scheduler == 'StepLR':
         scheduler = optim.lr_scheduler.StepLR(optimizer,step_size=20, gamma=0.7)
-    elif: args.scheduler == 'ROP':
+    elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
-    elif: args.scheduler == 'OneLR':
+    elif args.scheduler == 'OneLR':
         scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.8,div_factor=1.81, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=True)
-    else :
+    else:
         raise Exception("The specified scheduler doesnt exist")
 
     for epoch in range(args.epochs):
