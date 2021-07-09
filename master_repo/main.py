@@ -162,7 +162,7 @@ test_acc = []
 total_train_loss = 0
 
 if args.lr_finder:
-    if args.lr_finder_type == "exp" || args.lr_finder_type == "linear":
+    if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
         lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=100, step_mode=args.lr_finder_type)
