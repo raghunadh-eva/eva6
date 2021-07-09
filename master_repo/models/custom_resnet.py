@@ -76,7 +76,7 @@ class ResNetCustom(nn.Module):
                          )
         self.layer2 =    self._make_layer(block, 512, num_blocks[2], stride=2)
 
-        self.pool1 = nn.Maxpool2d(4,4)
+        self.pool1 = nn.MaxPool2d(4,4)
 
         self.linear = nn.Linear(512*block.expansion, num_classes)
 
