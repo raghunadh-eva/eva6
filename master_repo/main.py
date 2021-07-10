@@ -79,7 +79,7 @@ if args.eva_session == 9:
                                         height=h,
                                         width=w
                                         )
-                                ], p = 1),
+                                ], p = 0.5),
                                 A.HorizontalFlip(),
                                 A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
                                 Apy.ToTensorV2()
@@ -184,7 +184,7 @@ else:
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     elif args.scheduler == 'OneLR':
-        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.006,div_factor=1.2,final_div_factor=5, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=False)
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.06,div_factor=1.15,final_div_factor=11, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=False)
     else:
         raise Exception("The specified scheduler doesnt exist")
 
