@@ -186,8 +186,8 @@ else:
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     elif args.scheduler == 'OneLR':
-        #scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.02, div_factor=20,final_div_factor=1,steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=False)
-        scheduler = optim.lr_scheduler.CyclicLR(optimizer, max_lr=0.03,step_size_up=392, step_size_down=1862,scale_mode="iterations",base_lr=0.002,verbose=False)
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.06,total_steps=len(train_loader)*args.epochs, epochs=args.epochs,verbose=False,pct_start=0.2,div_factor=6,final_div_factor=0.5)
+        #scheduler = optim.lr_scheduler.CyclicLR(optimizer, max_lr=0.03,step_size_up=392, step_size_down=1862,scale_mode="iterations",base_lr=0.002,verbose=False)
         #div_factor=1.001,final_div_factor=2
     else:
         raise Exception("The specified scheduler doesnt exist")
