@@ -169,9 +169,9 @@ if args.lr_finder or args.lr_finder_validation:
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
         if args.lr_finder_validation:
-            lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=100, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+            lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=0.5, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
         else:
-            lr_finder.range_test(train_loader, end_lr=100, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+            lr_finder.range_test(train_loader, end_lr=0.5, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
         #lr_finder.plot(log_lr=False)
         lr_finder.plot() # to inspect the loss-learning rate graph
         lr_finder.reset()
@@ -184,7 +184,7 @@ else:
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     elif args.scheduler == 'OneLR':
-        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.02,div_factor=1.001,final_div_factor=4, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=False)
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.01,div_factor=1.001,final_div_factor=2, steps_per_epoch=len(train_loader), epochs=args.epochs,verbose=False)
     else:
         raise Exception("The specified scheduler doesnt exist")
 
