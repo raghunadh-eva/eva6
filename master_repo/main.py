@@ -177,7 +177,11 @@ if args.lr_finder or args.lr_finder_validation:
         else:
             lr_finder.range_test(train_loader, end_lr=1.5, num_iter=iter, step_mode=args.lr_finder_type)
         #lr_finder.plot(log_lr=False)
-        lr_finder.plot() # to inspect the loss-learning rate graph
+        if args.lr_finder_type == "linear":
+            lr_finder.plot(log_lr=False)
+            # to inspect the loss-learning rate graph
+        else:
+            lr_finder.plot()
         lr_finder.reset()
     else:
         raise Exception("Unknown lr step_mode type")
