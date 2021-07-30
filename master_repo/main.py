@@ -194,7 +194,7 @@ if args.lr_finder or args.lr_finder_validation:
         if args.lr_finder_validation:
             lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=1.5, num_iter=iter, step_mode=args.lr_finder_type)
         else:
-            lr_finder.range_test(train_loader, end_lr=1.5, num_iter=iter, step_mode=args.lr_finder_type)
+            lr_finder.range_test(train_loader, end_lr=2, num_iter=iter, step_mode=args.lr_finder_type)
         #lr_finder.plot(log_lr=False)
         if args.lr_finder_type == "linear":
             lr_finder.plot(log_lr=False)
