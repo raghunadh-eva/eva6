@@ -169,11 +169,13 @@ total_train_loss = 0
 if args.lr_finder or args.lr_finder_validation:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
+        num_iter = len(train_loader)/args.batch_size
+        print('Evaluating the learning rate over',num_iter,'iterations')
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
         if args.lr_finder_validation:
-            lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=0.5, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+            lr_finder.range_test(train_loader, val_loader=test_loader, end_lr=0.5, num_iter, step_mode=args.lr_finder_type)
         else:
-            lr_finder.range_test(train_loader, end_lr=0.5, num_iter=args.epochs*args.batch_size, step_mode=args.lr_finder_type)
+            lr_finder.range_test(train_loader, end_lr=0.5, num_iter, step_mode=args.lr_finder_type)
         #lr_finder.plot(log_lr=False)
         lr_finder.plot() # to inspect the loss-learning rate graph
         lr_finder.reset()
