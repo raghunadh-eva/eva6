@@ -79,9 +79,9 @@ if args.eva_session == 9:
                                         height=h,
                                         width=w
                                         )
-                                ], p = 1),
-                                A.HorizontalFlip(p=1),
-                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None,p=1),
+                                ], p = 0.5),
+                                A.HorizontalFlip(p=0.5),
+                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None,p=0.5),
                                 Apy.ToTensorV2()
                         ])
 else:
