@@ -71,7 +71,7 @@ class ResNetCustom(nn.Module):
 
         self.pool1 = nn.MaxPool2d(4,4)
 
-        self.linear = nn.Linear(512*block.expansion, num_classes)
+        self.linear = nn.Linear(512*block.expansion, num_classes,bias=False)
 
         self.softmax = nn.Softmax(dim=-1)
 

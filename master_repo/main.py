@@ -188,7 +188,7 @@ total_train_loss = 0
 if args.lr_finder or args.lr_finder_validation:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
-        iter = len(train_loader) * 24
+        iter = len(train_loader) * 5
         print('Evaluating the learning rate over',iter,'iterations')
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
         if args.lr_finder_validation:
