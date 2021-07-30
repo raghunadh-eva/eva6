@@ -24,7 +24,7 @@ class BasicBlock_c(nn.Module):
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3,padding=1,
                                stride=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
-        self.conv3 = nn.Conv2d(planes, planes, kernel_size=1,
+        self.conv3 = nn.Conv2d(planes, planes, kernel_size=3,padding=1,
                                stride=2, bias=False)
         self.bn3 = nn.BatchNorm2d(planes)
 
