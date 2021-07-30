@@ -188,7 +188,7 @@ total_train_loss = 0
 if args.lr_finder or args.lr_finder_validation:
     if args.lr_finder_type == "exp" or args.lr_finder_type == "linear":
         lr_finder = LRFinder(model, optimizer, loss_function, device=device)
-        iter = len(train_loader)
+        iter = len(train_loader) * 5
         print('Evaluating the learning rate over',iter,'iterations')
         #lr_finder.range_test(train_loader, end_lr=100, num_iter=100)
         if args.lr_finder_validation:
@@ -211,7 +211,7 @@ else:
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     elif args.scheduler == 'OneLR':
-        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.3,total_steps=len(train_loader)*args.epochs, epochs=args.epochs,verbose=False,pct_start=0.166,div_factor=3,final_div_factor=1)
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.8,total_steps=len(train_loader)*args.epochs, epochs=args.epochs,verbose=False,pct_start=0.166,div_factor=8,final_div_factor=1)
         #scheduler = optim.lr_scheduler.CyclicLR(optimizer, max_lr=0.03,step_size_up=392, step_size_down=1862,scale_mode="iterations",base_lr=0.002,verbose=False)
         #div_factor=1.001,final_div_factor=2
     else:
