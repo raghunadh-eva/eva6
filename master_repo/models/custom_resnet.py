@@ -50,7 +50,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(128),
                             nn.ReLU()
                          )
-        self.layer1 =    self._make_layer(block, 128, num_blocks[0], stride=2)
+        self.layer1 =    self._make_layer(block, ,64,128, num_blocks[0], stride=2)
 
         #Layer2
         self.conv2 =     nn.Sequential(
@@ -67,7 +67,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(512),
                             nn.ReLU()
                          )
-        self.layer3 =    self._make_layer(block, 512, num_blocks[2], stride=2)
+        self.layer3 =    self._make_layer(block, 256, 512, num_blocks[2], stride=2)
 
         self.pool1 = nn.MaxPool2d(4,4)
 
@@ -75,12 +75,13 @@ class ResNetCustom(nn.Module):
 
         self.softmax = nn.Softmax(dim=-1)
 
-    def _make_layer(self, block, planes, num_blocks, stride):
+    def _make_layer(self, block, in_planes, planes, num_blocks, stride):
         #strides = [stride] + [1]*(num_blocks-1)
         layers = []
         #for stride in strides:
+        self.in_planes = in_planes
         layers.append(block(self.in_planes, planes, stride))
-        self.in_planes = planes * block.expansion
+        #self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
 
     def forward(self, x):
