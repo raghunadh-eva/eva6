@@ -56,7 +56,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(128),
                             nn.ReLU()
                          )
-        self.layer1 =    self._make_layer(block, 128, num_blocks[0], stride=1)
+        self.layer1 =    self._make_layer(block, 128, num_blocks[0], stride=2)
 
         #Layer2
         self.conv2 =     nn.Sequential(
@@ -65,7 +65,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(256),
                             nn.ReLU()
                          )
-        self.layer2 =    self._make_layer(block, 256, num_blocks[1], stride=1)
+        self.layer2 =    self._make_layer(block, 256, num_blocks[1], stride=2)
 
         ##layer3
         self.conv3 =     nn.Sequential(
@@ -74,7 +74,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(512),
                             nn.ReLU()
                          )
-        self.layer3 =    self._make_layer(block, 512, num_blocks[2], stride=1)
+        self.layer3 =    self._make_layer(block, 512, num_blocks[2], stride=2)
 
         self.pool1 = nn.MaxPool2d(4,4)
 
@@ -92,11 +92,11 @@ class ResNetCustom(nn.Module):
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv0(x)))
-        out = self.conv1(out)
-        out += self.layer1(out)
+        out_l1 = self.layer1(out)
+        out = self.conv1(out) + out_l1
         out = self.conv2(out)
-        out = self.conv3(out)
-        out += self.layer3(out)
+        out_l3 = self.layer3(out)
+        out = self.conv3(out) + out_l3
 
         out = self.pool1(out)
         out = out.view(out.size(0), -1)
