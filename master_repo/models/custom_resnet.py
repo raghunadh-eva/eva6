@@ -92,9 +92,11 @@ class ResNetCustom(nn.Module):
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv0(x)))
-        out = self.conv1(out) + self.layer1(out)
+        out = self.conv1(out)
+        out += self.layer1(out)
         out = self.conv2(out)
-        out = self.conv3(out) + self.layer3(out)
+        out = self.conv3(out)
+        out += self.layer3(out)
 
         out = self.pool1(out)
         out = out.view(out.size(0), -1)
