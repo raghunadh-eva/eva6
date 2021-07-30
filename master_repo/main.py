@@ -97,7 +97,7 @@ if args.eva_session == 9:
                                             height=h,
                                             width=w
                                             )
-                                    ], p = 0.5),
+                                    ], p = 1),
                                     A.HorizontalFlip(),
                                     A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
                                     Apy.ToTensorV2()
@@ -116,7 +116,7 @@ else:
                                         height=h,
                                         width=w
                                         )
-                                ], p = 0.5),
+                                ], p = 1),
                                 A.Rotate(limit=5,border_mode=cv2.BORDER_CONSTANT, value=(mean[0],mean[1],mean[2]),p=0.5),
                      #A.Cutout(num_holes=1,max_h_size=16,max_w_size=16,fill_value=(0.4914,0.4822,0.4465))
                      A.CoarseDropout(max_holes=1,max_height=16,max_width=16,min_holes=1,min_height=16,min_width=16,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
