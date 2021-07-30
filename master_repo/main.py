@@ -79,28 +79,10 @@ if args.eva_session == 9:
                                         height=h,
                                         width=w
                                         )
-                                ], p = 0.5),
-                                A.HorizontalFlip(),
-                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
+                                ], p = 1),
+                                A.HorizontalFlip(p=1),
+                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None,p=1),
                                 Apy.ToTensorV2()
-                        ])
-    test_transforms_a  = A.Compose([
-                                    A.Normalize(mean=(mean[0], mean[1], mean[2]), std=(std[0], std[1], std[2])),
-                                    A.Sequential([
-                                        A.PadIfNeeded(
-                                            min_height=h+4,
-                                            min_width=w+4,
-                                            border_mode=cv2.BORDER_CONSTANT,
-                                            value=(mean[0],mean[1],mean[2])
-                                            ),
-                                            A.RandomCrop(
-                                            height=h,
-                                            width=w
-                                            )
-                                    ], p = 1),
-                                    A.HorizontalFlip(),
-                                    A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None),
-                                    Apy.ToTensorV2()
                         ])
 else:
     train_transforms_a = A.Compose([
