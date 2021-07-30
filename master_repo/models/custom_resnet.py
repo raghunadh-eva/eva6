@@ -50,7 +50,7 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(128),
                             nn.ReLU()
                          )
-        self.layer1 =    self._make_layer(block, ,64,128, num_blocks[0], stride=2)
+        self.layer1 =    self._make_layer(block,64,128, num_blocks[0], stride=2)
 
         #Layer2
         self.conv2 =     nn.Sequential(
