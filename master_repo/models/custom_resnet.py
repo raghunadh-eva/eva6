@@ -19,25 +19,26 @@ class BasicBlock_c(nn.Module):
     def __init__(self, in_planes, planes, stride=1):
         super(BasicBlock_c, self).__init__()
         self.conv1 = nn.Conv2d(
-            in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+            in_planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3,
                                stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
 
-        #self.shortcut = nn.Sequential()
+        self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
                 nn.Conv2d(in_planes, self.expansion*planes,
                           kernel_size=1, stride=stride, bias=False),
-                nn.BatchNorm2d(self.expansion*planes)
+                nn.BatchNorm2d(self.expansion*planes),
+                nn.ReLU()
             )
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
         out = self.bn2(self.conv2(out))
         out = F.relu(out)
-        #out += self.shortcut(x)
+        out += self.shortcut(out)
         return out
 
 class ResNetCustom(nn.Module):
@@ -46,8 +47,11 @@ class ResNetCustom(nn.Module):
 
         self.in_planes = 64
 
-        self.conv0  =    nn.Conv2d(3, 64, kernel_size=3,stride=1, padding=1, bias=False)
-        self.bn1    =    nn.BatchNorm2d(64)
+        self.conv0  =    nn.Sequential(
+                            nn.Conv2d(3, 64, kernel_size=3,stride=1, padding=1, bias=False),
+                            nn.BatchNorm2d(64),
+                            nn.ReLU()
+                         )
 
         ##Layer1
         self.conv1 =     nn.Sequential(
@@ -65,7 +69,6 @@ class ResNetCustom(nn.Module):
                             nn.BatchNorm2d(256),
                             nn.ReLU()
                          )
-        self.layer2 =    self._make_layer(block, 256, num_blocks[1], stride=2)
 
         ##layer3
         self.conv3 =     nn.Sequential(
@@ -91,7 +94,7 @@ class ResNetCustom(nn.Module):
         return nn.Sequential(*layers)
 
     def forward(self, x):
-        out = F.relu(self.bn1(self.conv0(x)))
+        out = self.conv0(x)
         out_l1 = self.layer1(out)
         out = self.conv1(out) + out_l1
         out = self.conv2(out)
