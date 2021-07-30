@@ -22,13 +22,17 @@ class BasicBlock_c(nn.Module):
             in_planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn1 = nn.BatchNorm2d(planes)
         self.conv2 = nn.Conv2d(planes, planes, kernel_size=3,padding=1,
-                               stride=stride, bias=False)
+                               stride=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
+        self.conv3 = nn.Conv2d(planes, planes, kernel_size=1,
+                               stride=2, bias=False)
+        self.bn3 = nn.BatchNorm2d(planes)
+
 
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
-        out = self.bn2(self.conv2(out))
-        out = F.relu(out)
+        out = F.relu(self.bn2(self.conv2(out)))
+        out = F.relu(self.bn3(self.conv3(out)))
         return out
 
 class ResNetCustom(nn.Module):
