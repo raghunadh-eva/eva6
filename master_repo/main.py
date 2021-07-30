@@ -125,8 +125,8 @@ else:
 
 if args.dataset == 'CIFAR10':
     train_data = data_albumentations_cifar10(root='./data',train=True,download=True, transform=train_transforms_a)
-    #test_data =  data_albumentations_cifar10(root='./data',train=False,download=True,transform=test_transforms_a)
-    test_data =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
+    test_data =  data_albumentations_cifar10(root='./data',train=False,download=True,transform=test_transforms_a)
+    #est_data =  datasets.CIFAR10('./data', train=False, download=True, transform=test_transforms)
 
 elif args.dataset == 'MNIST':
     print("place holder for mnist data")
