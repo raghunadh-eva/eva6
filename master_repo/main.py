@@ -38,8 +38,8 @@ parser.add_argument("-lr","--lr_value" ,type=float, help="The Learning rate to s
 parser.add_argument("-find_lr","--lr_finder" , help="Find the LR", action="store_true")
 parser.add_argument("-find_lr_val","--lr_finder_validation" , help="Use validation data for finding the learning rate graph", action="store_true")
 parser.add_argument("-lr_type","--lr_finder_type" , help="Specify the lr increase type. exp/linear", default="")
-parser.add_argument("-lr_start","--lr_start" , help="Initial LR to start with for OneCycleLR", default="")
-parser.add_argument("-lr_end","--lr_end" , help="Max LR to start with for OneCycleLR", default="")
+parser.add_argument("-lr_start","--lr_start" ,type=float, help="Initial LR to start with for OneCycleLR", default="0")
+parser.add_argument("-lr_end","--lr_end" , type=float,help="Max LR to start with for OneCycleLR", default="0")
 
 args = parser.parse_args()
 
