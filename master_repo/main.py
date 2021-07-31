@@ -83,7 +83,7 @@ if args.eva_session == 9:
                                         )
                                 ], p = 0.5),
                                 A.HorizontalFlip(p=0.5),
-                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None,p=1),
+                                A.CoarseDropout(max_holes=1,max_height=8,max_width=8,min_holes=1,min_height=8,min_width=8,fill_value=(mean[0], mean[1], mean[2]),mask_fill_value=None,p=0.5),
                                 Apy.ToTensorV2()
                         ])
 else:
@@ -148,7 +148,7 @@ else:
     raise Exception("The input dataset is not supported")
 
 if args.optimizer == 'SGD':
-    optimizer = optim.SGD(model.parameters(), lr=args.lr_value, momentum=0.6)
+    optimizer = optim.SGD(model.parameters(), lr=args.lr_value, momentum=0.9)
 elif args.optimizer == "ASGD":
     optimizer = optim.ASGD(model.parameters(), lr=args.lr_value, weight_decay=0.0001)
 elif args.optimizer == "RMSprop":
