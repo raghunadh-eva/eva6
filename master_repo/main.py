@@ -38,6 +38,8 @@ parser.add_argument("-lr","--lr_value" ,type=float, help="The Learning rate to s
 parser.add_argument("-find_lr","--lr_finder" , help="Find the LR", action="store_true")
 parser.add_argument("-find_lr_val","--lr_finder_validation" , help="Use validation data for finding the learning rate graph", action="store_true")
 parser.add_argument("-lr_type","--lr_finder_type" , help="Specify the lr increase type. exp/linear", default="")
+parser.add_argument("-lr_start","--lr_start" , help="Initial LR to start with for OneCycleLR", default="")
+parser.add_argument("-lr_end","--lr_end" , help="Max LR to start with for OneCycleLR", default="")
 
 args = parser.parse_args()
 
@@ -208,7 +210,10 @@ else:
     elif args.scheduler == 'ROP':
         scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, patience=5, factor=0.7, verbose=True)
     elif args.scheduler == 'OneLR':
-        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=0.045,total_steps=len(train_loader)*args.epochs, epochs=args.epochs,verbose=False,pct_start=0.166,div_factor=45,final_div_factor=1)
+        lr_start = args.lr_start
+        lr_end = args.lr_end
+        div_fact = lr_end/lr_start
+        scheduler = optim.lr_scheduler.OneCycleLR(optimizer, max_lr=lr_end,total_steps=len(train_loader)*args.epochs, epochs=args.epochs,verbose=False,pct_start=0.166,div_factor=div_fact,final_div_factor=1)
         #scheduler = optim.lr_scheduler.CyclicLR(optimizer, max_lr=0.03,step_size_up=392, step_size_down=1862,scale_mode="iterations",base_lr=0.002,verbose=False)
         #div_factor=1.001,final_div_factor=2
         #0.0014985
