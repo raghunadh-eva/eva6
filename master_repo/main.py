@@ -149,6 +149,9 @@ if args.optimizer == 'SGD':
     optimizer = optim.SGD(model.parameters(), lr=args.lr_value, momentum=0.9)
 elif args.optimizer == "ASGD":
     optimizer = optim.ASGD(model.parameters(), lr=args.lr_value, weight_decay=0.0001)
+elif args.optimizer == "RMSprop":
+    #RMSprop(params, lr=0.01, alpha=0.99, eps=1e-08, weight_decay=0, momentum=0, centered=False)
+    optimizer = optim.RMSprop(model.parameters(), lr=args.lr_value, momentum=0.9,weight_decay=0.0001)
 else:
     raise Exception("The specified optimizer doesnt exist")
 
