@@ -737,3 +737,303 @@ Loss=2.057185173034668 Batch_id=97 Accuracy=86.73: 100%|████████
 Scheduler stepping should be for every batch
 Test set: Average loss: -8529.7542, Accuracy: 8591/10000 (85.91%)
 ```
+
+
+
+Best until now - 90% (0.001)
+
+```
+Epoch 0, lr 0.0010000000000000009
+Loss=7.243546485900879 Batch_id=97 Accuracy=25.22: 100%|██████████| 98/98 [00:13<00:00,  7.02it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -3456.3414, Accuracy: 3817/10000 (38.17%)
+
+Epoch 1, lr 0.006783014649153367
+Loss=6.31939697265625 Batch_id=97 Accuracy=45.39: 100%|██████████| 98/98 [00:13<00:00,  7.03it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -4270.7230, Accuracy: 4421/10000 (44.21%)
+
+Epoch 2, lr 0.020701980808682945
+Loss=5.234416961669922 Batch_id=97 Accuracy=56.36: 100%|██████████| 98/98 [00:14<00:00,  6.86it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -5630.8644, Accuracy: 5763/10000 (57.63%)
+
+Epoch 3, lr 0.0345011461502165
+Loss=4.290408134460449 Batch_id=97 Accuracy=64.92: 100%|██████████| 98/98 [00:14<00:00,  6.93it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6128.7271, Accuracy: 6324/10000 (63.24%)
+
+Epoch 4, lr 0.03999983507478777
+Loss=3.6345417499542236 Batch_id=97 Accuracy=69.43: 100%|██████████| 98/98 [00:14<00:00,  6.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6612.3057, Accuracy: 6745/10000 (67.45%)
+
+Epoch 5, lr 0.039747606505561896
+Loss=3.104907274246216 Batch_id=97 Accuracy=71.80: 100%|██████████| 98/98 [00:14<00:00,  6.89it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6683.9966, Accuracy: 6801/10000 (68.01%)
+
+Epoch 6, lr 0.039022193824468525
+Loss=2.8226797580718994 Batch_id=97 Accuracy=73.69: 100%|██████████| 98/98 [00:14<00:00,  6.98it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6906.7571, Accuracy: 7007/10000 (70.07%)
+
+Epoch 7, lr 0.03784143061279689
+Loss=2.7086544036865234 Batch_id=97 Accuracy=74.56: 100%|██████████| 98/98 [00:13<00:00,  7.04it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7000.6800, Accuracy: 7113/10000 (71.13%)
+
+Epoch 8, lr 0.03623434481183827
+Loss=2.566378355026245 Batch_id=97 Accuracy=75.08: 100%|██████████| 98/98 [00:14<00:00,  6.79it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6635.4911, Accuracy: 6691/10000 (66.91%)
+
+Epoch 9, lr 0.03424044509853915
+Loss=2.482158660888672 Batch_id=97 Accuracy=75.67: 100%|██████████| 98/98 [00:14<00:00,  6.93it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6772.6216, Accuracy: 6851/10000 (68.51%)
+
+Epoch 10, lr 0.03190874960222993
+Loss=2.513580799102783 Batch_id=97 Accuracy=75.88: 100%|██████████| 98/98 [00:14<00:00,  6.98it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6818.7443, Accuracy: 6909/10000 (69.09%)
+
+Epoch 11, lr 0.029296580840505092
+Loss=2.42219877243042 Batch_id=97 Accuracy=76.96: 100%|██████████| 98/98 [00:14<00:00,  6.97it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7309.4520, Accuracy: 7390/10000 (73.90%)
+
+Epoch 12, lr 0.026468156499610845
+Loss=2.394486904144287 Batch_id=97 Accuracy=77.52: 100%|██████████| 98/98 [00:14<00:00,  6.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7488.9016, Accuracy: 7578/10000 (75.78%)
+
+Epoch 13, lr 0.023493010703665107
+Loss=2.4005391597747803 Batch_id=97 Accuracy=78.55: 100%|██████████| 98/98 [00:14<00:00,  6.86it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7046.5800, Accuracy: 7144/10000 (71.44%)
+
+Epoch 14, lr 0.020444284584305417
+Loss=2.327444076538086 Batch_id=97 Accuracy=78.65: 100%|██████████| 98/98 [00:14<00:00,  6.95it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7759.0726, Accuracy: 7851/10000 (78.51%)
+
+Epoch 15, lr 0.017396928175485323
+Loss=2.361740827560425 Batch_id=97 Accuracy=80.16: 100%|██████████| 98/98 [00:14<00:00,  6.92it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7459.9176, Accuracy: 7547/10000 (75.47%)
+
+Epoch 16, lr 0.01442585783812662
+Loss=2.284122943878174 Batch_id=97 Accuracy=81.20: 100%|██████████| 98/98 [00:14<00:00,  6.80it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7506.5511, Accuracy: 7585/10000 (75.85%)
+
+Epoch 17, lr 0.011604114512591055
+Loss=2.2463765144348145 Batch_id=97 Accuracy=81.76: 100%|██████████| 98/98 [00:14<00:00,  6.78it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7846.0648, Accuracy: 7939/10000 (79.39%)
+
+Epoch 18, lr 0.009001068076583976
+Loss=2.2362961769104004 Batch_id=97 Accuracy=83.60: 100%|██████████| 98/98 [00:14<00:00,  6.81it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8137.4410, Accuracy: 8244/10000 (82.44%)
+
+Epoch 19, lr 0.006680711952644233
+Loss=2.227081298828125 Batch_id=97 Accuracy=84.73: 100%|██████████| 98/98 [00:14<00:00,  6.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8125.1132, Accuracy: 8204/10000 (82.04%)
+
+Epoch 20, lr 0.004700089890674206
+Loss=2.0971617698669434 Batch_id=97 Accuracy=85.92: 100%|██████████| 98/98 [00:14<00:00,  6.79it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8462.6874, Accuracy: 8539/10000 (85.39%)
+
+Epoch 21, lr 0.0031078936015662448
+Loss=2.111048698425293 Batch_id=97 Accuracy=87.37: 100%|██████████| 98/98 [00:14<00:00,  6.67it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8573.0402, Accuracy: 8650/10000 (86.50%)
+
+Epoch 22, lr 0.0019432657177698698
+Loss=2.0933568477630615 Batch_id=97 Accuracy=88.63: 100%|██████████| 98/98 [00:14<00:00,  6.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8705.8565, Accuracy: 8783/10000 (87.83%)
+
+Epoch 23, lr 0.0012348375088765066
+Loss=2.044245481491089 Batch_id=97 Accuracy=89.85: 100%|██████████| 98/98 [00:14<00:00,  6.92it/s]
+Scheduler stepping should be for every batch
+Test set: Average loss: -8744.2185, Accuracy: 8827/10000 (88.27%)
+```
+
+
+
+Accuracy
+
+
+
+```
+Epoch 0, lr 0.0010000000000000009
+Loss=7.242455959320068 Batch_id=97 Accuracy=25.21: 100%|██████████| 98/98 [00:25<00:00,  3.89it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -3466.4351, Accuracy: 3806/10000 (38.06%)
+
+Epoch 1, lr 0.006783014649153367
+Loss=6.292819023132324 Batch_id=97 Accuracy=45.09: 100%|██████████| 98/98 [00:25<00:00,  3.89it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -4246.6084, Accuracy: 4419/10000 (44.19%)
+
+Epoch 2, lr 0.020701980808682945
+Loss=5.207176208496094 Batch_id=97 Accuracy=57.41: 100%|██████████| 98/98 [00:25<00:00,  3.87it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -5292.2744, Accuracy: 5417/10000 (54.17%)
+
+Epoch 3, lr 0.0345011461502165
+Loss=4.271137237548828 Batch_id=97 Accuracy=65.21: 100%|██████████| 98/98 [00:25<00:00,  3.85it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6346.1723, Accuracy: 6498/10000 (64.98%)
+
+Epoch 4, lr 0.03999983507478777
+Loss=3.609896659851074 Batch_id=97 Accuracy=70.28: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6417.4812, Accuracy: 6541/10000 (65.41%)
+
+Epoch 5, lr 0.039747606505561896
+Loss=3.0803754329681396 Batch_id=97 Accuracy=72.35: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6653.8914, Accuracy: 6789/10000 (67.89%)
+
+Epoch 6, lr 0.039022193824468525
+Loss=2.802889585494995 Batch_id=97 Accuracy=73.72: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7042.8848, Accuracy: 7144/10000 (71.44%)
+
+Epoch 7, lr 0.03784143061279689
+Loss=2.698796272277832 Batch_id=97 Accuracy=74.37: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6547.3373, Accuracy: 6626/10000 (66.26%)
+
+Epoch 8, lr 0.03623434481183827
+Loss=2.5502614974975586 Batch_id=97 Accuracy=74.78: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7018.5675, Accuracy: 7094/10000 (70.94%)
+
+Epoch 9, lr 0.03424044509853915
+Loss=2.488675117492676 Batch_id=97 Accuracy=75.46: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -6793.6275, Accuracy: 6866/10000 (68.66%)
+
+Epoch 10, lr 0.03190874960222993
+Loss=2.4819650650024414 Batch_id=97 Accuracy=75.75: 100%|██████████| 98/98 [00:25<00:00,  3.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7114.9866, Accuracy: 7204/10000 (72.04%)
+
+Epoch 11, lr 0.029296580840505092
+Loss=2.3932275772094727 Batch_id=97 Accuracy=76.75: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7292.5911, Accuracy: 7383/10000 (73.83%)
+
+Epoch 12, lr 0.026468156499610845
+Loss=2.3917157649993896 Batch_id=97 Accuracy=77.94: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7171.7456, Accuracy: 7254/10000 (72.54%)
+
+Epoch 13, lr 0.023493010703665107
+Loss=2.3975210189819336 Batch_id=97 Accuracy=77.90: 100%|██████████| 98/98 [00:25<00:00,  3.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7568.4478, Accuracy: 7639/10000 (76.39%)
+
+Epoch 14, lr 0.020444284584305417
+Loss=2.339938163757324 Batch_id=97 Accuracy=79.29: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7452.8156, Accuracy: 7526/10000 (75.26%)
+
+Epoch 15, lr 0.017396928175485323
+Loss=2.337491035461426 Batch_id=97 Accuracy=79.73: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7665.2850, Accuracy: 7759/10000 (77.59%)
+
+Epoch 16, lr 0.01442585783812662
+Loss=2.2835774421691895 Batch_id=97 Accuracy=80.55: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -7894.2390, Accuracy: 7997/10000 (79.97%)
+
+Epoch 17, lr 0.011604114512591055
+Loss=2.2429821491241455 Batch_id=97 Accuracy=81.65: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8047.7534, Accuracy: 8115/10000 (81.15%)
+
+Epoch 18, lr 0.009001068076583976
+Loss=2.2351560592651367 Batch_id=97 Accuracy=83.40: 100%|██████████| 98/98 [00:25<00:00,  3.81it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8011.4662, Accuracy: 8095/10000 (80.95%)
+
+Epoch 19, lr 0.006680711952644233
+Loss=2.2045578956604004 Batch_id=97 Accuracy=84.54: 100%|██████████| 98/98 [00:25<00:00,  3.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8266.1351, Accuracy: 8344/10000 (83.44%)
+
+Epoch 20, lr 0.004700089890674206
+Loss=2.1058173179626465 Batch_id=97 Accuracy=86.29: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8467.0866, Accuracy: 8569/10000 (85.69%)
+
+Epoch 21, lr 0.0031078936015662448
+Loss=2.0853846073150635 Batch_id=97 Accuracy=87.30: 100%|██████████| 98/98 [00:25<00:00,  3.84it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8489.5345, Accuracy: 8586/10000 (85.86%)
+
+Epoch 22, lr 0.0019432657177698698
+Loss=2.080435037612915 Batch_id=97 Accuracy=88.78: 100%|██████████| 98/98 [00:25<00:00,  3.83it/s]
+Scheduler stepping should be for every batch
+  0%|          | 0/98 [00:00<?, ?it/s]
+Test set: Average loss: -8698.1491, Accuracy: 8772/10000 (87.72%)
+
+Epoch 23, lr 0.0012348375088765066
+Loss=2.0470664501190186 Batch_id=97 Accuracy=89.88: 100%|██████████| 98/98 [00:25<00:00,  3.82it/s]
+Scheduler stepping should be for every batch
+Test set: Average loss: -8712.6046, Accuracy: 8771/10000 (87.71%)
+```
