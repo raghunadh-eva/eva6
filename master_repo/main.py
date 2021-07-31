@@ -152,6 +152,18 @@ elif args.optimizer == "ASGD":
 elif args.optimizer == "RMSprop":
     #RMSprop(params, lr=0.01, alpha=0.99, eps=1e-08, weight_decay=0, momentum=0, centered=False)
     optimizer = optim.RMSprop(model.parameters(), lr=args.lr_value, momentum=0.9,weight_decay=0.0001)
+elif args.optimizer == "Adam":
+    #optim.Adam(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0, amsgrad=False)
+    optimizer = optim.Adam(params, lr=args.lr_value, eps=1e-08, weight_decay=0.0001, amsgrad=False)
+elif args.optimizer == "Adamax":
+    #optim.Adamax(params, lr=0.002, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+    optimizer = optim.Adamax(params, lr=args.lr_value, weight_decay=0.0001)
+elif args.optimizer == "Adagrad":
+    #optim.Adagrad(params, lr=0.01, lr_decay=0, weight_decay=0, initial_accumulator_value=0, eps=1e-10)
+    optimizer = optim.Adagrad(params, lr=args.lr_value, weight_decay=0.0001)
+elif args.optimizer == "Adadelta":
+    #optim.Adadelta(params, lr=1.0, rho=0.9, eps=1e-06, weight_decay=0)
+    optimizer = optim.Adadelta(params, lr=args.lr_value, eps=1e-06, weight_decay=0.0001)
 else:
     raise Exception("The specified optimizer doesnt exist")
 
