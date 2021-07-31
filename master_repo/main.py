@@ -177,8 +177,8 @@ train_loader = torch.utils.data.DataLoader(train_data, **dataloader_args)
 test_loader  = torch.utils.data.DataLoader(test_data, **dataloader_args)
 
 #loss_function = nn.CrossEntropyLoss()
-#loss_function = nn.GaussianNLLLoss()
-loss_function = nn.MSELoss()
+loss_function = nn.GaussianNLLLoss()
+#loss_function = nn.MSELoss()
 
 print("No of EPOCHS:",args.epochs)
 
