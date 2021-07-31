@@ -147,8 +147,8 @@ else:
 
 if args.optimizer == 'SGD':
     optimizer = optim.SGD(model.parameters(), lr=args.lr_value, momentum=0.9)
-elif args.optimizer == "Adam":
-    optimizer = optim.SGD(model.parameters(), lr=args.lr_value, weight_decay=0.0001)
+elif args.optimizer == "ASGD":
+    optimizer = optim.ASGD(model.parameters(), lr=args.lr_value, weight_decay=0.0001)
 else:
     raise Exception("The specified optimizer doesnt exist")
 
