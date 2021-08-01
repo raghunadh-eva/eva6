@@ -225,7 +225,7 @@ def train(model, device, train_loader, optimizer,loss_function,scheduler,is_onel
     # Calculate loss
     #Cross entropy loss
     #loss = F.nll_loss(y_pred, target)
-    loss = loss_function(y_pred,target,target)
+    loss = loss_function(y_pred,target)
     #
 
     ##Add L1 Loss

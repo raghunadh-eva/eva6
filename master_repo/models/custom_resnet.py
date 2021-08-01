@@ -44,7 +44,8 @@ class ResNetCustom(nn.Module):
         self.conv0  =    nn.Sequential(
                             nn.Conv2d(3, 64, kernel_size=3,stride=1, padding=1, bias=False),
                             nn.BatchNorm2d(64),
-                            nn.ReLU()
+                            nn.ReLU(),
+                            nn.DropOut(0.05)
                          )
 
         ##Layer1
@@ -52,7 +53,8 @@ class ResNetCustom(nn.Module):
                             nn.Conv2d(64,128,kernel_size=3,stride=1,padding=1,bias=False),
                             nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(128),
-                            nn.ReLU()
+                            nn.ReLU(),
+                            nn.DropOut(0.05)
                          )
         self.layer1 =    self._make_layer(block,64,128, num_blocks[0], stride=2)
 
@@ -61,7 +63,8 @@ class ResNetCustom(nn.Module):
                             nn.Conv2d(128,256,kernel_size=3,stride=1,padding=1,bias=False),
                             nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(256),
-                            nn.ReLU()
+                            nn.ReLU(),
+                            nn.DropOut(0.05)
                          )
 
         ##layer3
@@ -69,7 +72,8 @@ class ResNetCustom(nn.Module):
                             nn.Conv2d(256,512,kernel_size=3,stride=1,padding=1,bias=False),
                             nn.MaxPool2d(2,2),
                             nn.BatchNorm2d(512),
-                            nn.ReLU()
+                            nn.ReLU(),
+                            nn.DropOut(0.05)
                          )
         self.layer3 =    self._make_layer(block, 256, 512, num_blocks[2], stride=2)
 
